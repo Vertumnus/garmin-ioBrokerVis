@@ -1,0 +1,23 @@
+<resources>
+    <properties>
+        <property id="url" type="string">http://www.example.com</property>
+        <property id="defobj" type="string" />
+        <property id="user" type="string" />
+        <property id="pass" type="string" />
+    </properties>
+
+    <settings>
+        <setting propertyKey="@Properties.url" title="@Strings.url">
+            <settingConfig type="url" required="true" />
+        </setting>
+        <setting propertyKey="@Properties.defobj" title="@Strings.defobj">
+            <settingConfig type="alphaNumeric" required="true" />
+        </setting>
+        <setting propertyKey="@Properties.user" title="@Strings.user">
+            <settingConfig type="alphaNumeric" />
+        </setting>
+        <setting propertyKey="@Properties.pass" title="@Strings.password">
+            <settingConfig type="password" />
+        </setting>
+    </settings>
+</resources>

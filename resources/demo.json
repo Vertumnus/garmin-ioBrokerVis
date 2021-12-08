@@ -1,0 +1,223 @@
+{
+    "native": {
+        "spaces": [
+            {
+                "icon": "favorite",
+                "objects": [
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    }
+                ]
+            },
+            {
+                "icon": "home",
+                "objects": [
+                    {
+                        "type": "power",
+                        "get": "power",
+                        "set": "power"
+                    },
+                    {
+                        "type": "window",
+                        "get": "window",
+                        "set": "window"
+                    }
+                ]
+            },
+            {
+                "icon": "garage",
+                "objects": [
+                    {
+                        "type": "lock",
+                        "get": "lock",
+                        "set": "lock"
+                    },
+                    {
+                        "type": "power",
+                        "get": "power",
+                        "set": "power"
+                    },
+                    {
+                        "type": "window",
+                        "get": "window",
+                        "set": "window"
+                    }
+                ]
+            },
+            {
+                "icon": "tv",
+                "objects": [
+                    {
+                        "type": "toggle",
+                        "get": "media",
+                        "set": "media"
+                    },
+                    {
+                        "type": "vol+",
+                        "set": "vol",
+                        "com": "+"
+                    },
+                    {
+                        "type": "text",
+                        "get": "volume"
+                    },
+                    {
+                        "type": "vol-",
+                        "set": "vol",
+                        "com": "-"
+                    }
+                ]
+            },
+            {
+                "icon": "speaker",
+                "objects": [
+                    {
+                        "type": "text",
+                        "get": "volume"
+                    },
+                    {
+                        "type": "vol+",
+                        "set": "vol",
+                        "com": "+"
+                    },
+                    {
+                        "type": "toggle",
+                        "get": "media",
+                        "set": "media"
+                    },
+                    {
+                        "type": "mic",
+                        "get": "mic",
+                        "set": "mic"
+                    },
+                    {
+                        "type": "vol-",
+                        "set": "vol",
+                        "com": "-"
+                    }
+                ]
+            },
+            {
+                "icon": "bedroom",
+                "objects": [
+                    {
+                        "type": "window",
+                        "get": "window",
+                        "set": "window"
+                    },
+                    {
+                        "type": "lock",
+                        "get": "lock",
+                        "set": "lock"
+                    },
+                    {
+                        "type": "power",
+                        "get": "power",
+                        "set": "power"
+                    },
+                    {
+                        "type": "window",
+                        "get": "window",
+                        "set": "window"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "text",
+                        "get": "temp",
+                        "unit": "°C"
+                    }
+                ]
+            },
+            {
+                "icon": "yard",
+                "objects": [
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    },
+                    {
+                        "type": "bulb",
+                        "get": "bulb",
+                        "set": "bulb"
+                    }
+                ]
+            },
+            {
+                "icon": "living",
+                "objects": [
+                    {
+                        "type": "power",
+                        "get": "power",
+                        "set": "power"
+                    },
+                    {
+                        "type": "window",
+                        "get": "window",
+                        "set": "window"
+                    },
+                    {
+                        "type": "toggle",
+                        "get": "media",
+                        "set": "media"
+                    },
+                    {
+                        "type": "lock",
+                        "get": "lock",
+                        "set": "lock"
+                    },
+                    {
+                        "type": "mic",
+                        "get": "mic",
+                        "set": "mic"
+                    },
+                    {
+                        "type": "vol-",
+                        "set": "vol",
+                        "com": "-"
+                    },
+                    {
+                        "type": "text",
+                        "get": "volume"
+                    },
+                    {
+                        "type": "vol+",
+                        "set": "vol",
+                        "com": "+"
+                    }
+                ]
+            }
+        ]
+    }
+}

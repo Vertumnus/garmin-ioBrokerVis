@@ -1,0 +1,5 @@
+<layouts>
+    <layout id="MainLayout">
+        <bitmap id="ioBrokerIcon" x="center" y="center" filename="../drawables/ioBroker.png" />
+    </layout>
+</layouts>

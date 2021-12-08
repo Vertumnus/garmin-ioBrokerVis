@@ -1,0 +1,7 @@
+<strings>
+    <string id="AppName">ioBrokerVis</string>
+    <string id="url">URL zur Simple API am ioBroker Server</string>
+    <string id="defobj">Objekt mit der Konfiguration</string>
+    <string id="user">Benutzername</string>
+    <string id="password">Passwort</string>
+</strings>

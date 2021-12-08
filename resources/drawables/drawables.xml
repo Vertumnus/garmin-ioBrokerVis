@@ -1,0 +1,36 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="ioBrokerIcon.png" />
+
+    <bitmap id="FavoriteIcon" filename="favorite.png" />
+    <bitmap id="BathroomIcon" filename="bathroom.png" />
+    <bitmap id="BedroomIcon" filename="bedroom.png" />
+    <bitmap id="ChildroomIcon" filename="childroom.png" />
+    <bitmap id="DeckIcon" filename="deck.png" />
+    <bitmap id="DiningIcon" filename="dining.png" />
+    <bitmap id="GarageIcon" filename="garage.png" />
+    <bitmap id="HomeIcon" filename="home.png" />
+    <bitmap id="KitchenIcon" filename="kitchen.png" />
+    <bitmap id="LivingIcon" filename="living.png" />
+    <bitmap id="SpeakerIcon" filename="speaker.png" />
+    <bitmap id="StairsIcon" filename="stairs.png" />
+    <bitmap id="TVIcon" filename="tv.png" />
+    <bitmap id="WCIcon" filename="wc.png" />
+    <bitmap id="WorkIcon" filename="work.png" />
+    <bitmap id="YardIcon" filename="yard.png" />
+
+    <bitmap id="BulbOff" filename="bulb_off.png" />
+    <bitmap id="BulbOn" filename="bulb_on.png" />
+    <bitmap id="Execute" filename="execute.png" />
+    <bitmap id="MicOff" filename="mic_off.png" />
+    <bitmap id="MicOn" filename="mic_on.png" />
+    <bitmap id="Off" filename="off.png" />
+    <bitmap id="On" filename="on.png" />
+    <bitmap id="PowerOff" filename="power_off.png" />
+    <bitmap id="PowerOn" filename="power_on.png" />
+    <bitmap id="Unlocked" filename="unlocked.png" />
+    <bitmap id="Locked" filename="locked.png" />
+    <bitmap id="VolumeDown" filename="volume_down.png" />
+    <bitmap id="VolumeUp" filename="volume_up.png" />
+    <bitmap id="WindowClose" filename="window_close.png" />
+    <bitmap id="WindowOpen" filename="window_open.png" />
+</drawables>

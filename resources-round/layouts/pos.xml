@@ -1,0 +1,3 @@
+<resources>
+    <jsonData id="DevicePositions" filename="positions.json" />
+</resources>
