@@ -20,9 +20,9 @@
                         "set": "power"
                     },
                     {
-                        "type": "window",
-                        "get": "window",
-                        "set": "window"
+                        "type": "check",
+                        "get": "check",
+                        "set": "check"
                     }
                 ]
             },
@@ -40,9 +40,9 @@
                         "set": "power"
                     },
                     {
-                        "type": "window",
-                        "get": "window",
-                        "set": "window"
+                        "type": "flash",
+                        "get": "flash",
+                        "set": "flash"
                     }
                 ]
             },
@@ -103,9 +103,9 @@
                 "icon": "bedroom",
                 "objects": [
                     {
-                        "type": "window",
-                        "get": "window",
-                        "set": "window"
+                        "type": "check",
+                        "get": "check",
+                        "set": "check"
                     },
                     {
                         "type": "lock",
@@ -118,9 +118,9 @@
                         "set": "power"
                     },
                     {
-                        "type": "window",
-                        "get": "window",
-                        "set": "window"
+                        "type": "flash",
+                        "get": "flash",
+                        "set": "flash"
                     },
                     {
                         "type": "bulb",
@@ -138,9 +138,8 @@
                 "icon": "yard",
                 "objects": [
                     {
-                        "type": "bulb",
-                        "get": "bulb",
-                        "set": "bulb"
+                        "type": "torch",
+                        "set": "torch"
                     },
                     {
                         "type": "bulb",
@@ -153,9 +152,8 @@
                         "set": "bulb"
                     },
                     {
-                        "type": "bulb",
-                        "get": "bulb",
-                        "set": "bulb"
+                        "type": "lamp",
+                        "set": "lamp"
                     },
                     {
                         "type": "bulb",
@@ -183,9 +181,9 @@
                         "set": "power"
                     },
                     {
-                        "type": "window",
-                        "get": "window",
-                        "set": "window"
+                        "type": "check",
+                        "get": "check",
+                        "set": "check"
                     },
                     {
                         "type": "toggle",

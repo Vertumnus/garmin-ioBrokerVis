@@ -5,7 +5,7 @@
         Use "Monkey C: Edit Application" from the Visual Studio Code command palette
         to update the application attributes.
     -->
-    <iq:application id="f391e462-6445-4590-aaa3-7e94e42168e4" type="widget" name="@Strings.AppName" entry="ioBrokerVisApp" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="3.2.5">
+    <iq:application id="f391e462-6445-4590-aaa3-7e94e42168e4" type="widget" name="@Strings.AppName" entry="ioBrokerVisApp" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="2.4.0">
         <!--
             Use the following from the Visual Studio Code comand palette to edit
             the build targets:
@@ -15,17 +15,18 @@
         -->
         <iq:products>
             <iq:product id="legacyherocaptainmarvel"/>
+            <iq:product id="d2air"/>
             <iq:product id="legacysagadarthvader"/>
             <iq:product id="legacyherofirstavenger"/>
             <iq:product id="legacysagarey"/>
             <iq:product id="venu"/>
-            <iq:product id="venu2"/>
-            <iq:product id="venu2system5preview"/>
-            <iq:product id="venu2s"/>
             <iq:product id="venud"/>
             <iq:product id="venusqm"/>
+            <iq:product id="vivoactive3m"/>
+            <iq:product id="vivoactive3mlte"/>
             <iq:product id="vivoactive4"/>
             <iq:product id="vivoactive4s"/>
+            <iq:product id="vivoactive_hr"/>
         </iq:products>
         <!--
             Use "Monkey C: Edit Permissions" from the Visual Studio Code command

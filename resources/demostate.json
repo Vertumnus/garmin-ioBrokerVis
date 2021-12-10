@@ -1,10 +1,12 @@
 {
     "bulb": false,
+    "check": true,
     "power": true,
-    "window": false,
+    "flash": false,
     "lock": true,
     "media": true,
     "volume": 12,
     "mic": true,
-    "temp": "22.5"
+    "temp": "22.5",
+    "?": "?"
 }

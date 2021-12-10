@@ -3,106 +3,141 @@ using Toybox.Lang;
 
 class SpaceView extends WatchUi.View {
 
-    private var aPositions;
+    private var mTextSize;
 
     function initialize() {
         View.initialize();
-        aPositions = WatchUi.loadResource(Rez.JsonData.DevicePositions);
+        mTextSize = Graphics.getFontHeight(Application.getApp().GioBFont);
     }
 
     function getDevicePositionX(dc, size, index, offset){
-        return (dc.getWidth() * aPositions[size][index]["x"] / 100 + offset);
+        return (dc.getWidth() * Application.getApp().aPositions[size][index]["x"] / 100 + offset);
     }
 
     function getDevicePositionY(dc, size, index, offset){
-        return (dc.getHeight() * aPositions[size][index]["y"] / 100 + offset);
+        return (dc.getHeight() * Application.getApp().aPositions[size][index]["y"] / 100 + offset);
     }
 
     function getIconId(sType, bOn){
         switch(sType){
             case "bathroom":
-                return Rez.Drawables.BathroomIcon;
+                return "\"";
             case "bedroom":
-                return Rez.Drawables.BedroomIcon;
+                return "_";
+            case "books":
+                return "\\";
+            case "build":
+                return "=";
             case "bulb":
                 if(bOn){
-                    return Rez.Drawables.BulbOn;
+                    return "B";
                 }
                 else{
-                    return Rez.Drawables.BulbOff;
+                    return "b";
+                }
+            case "check":
+                if(bOn){
+                    return "C";
+                }
+                else{
+                    return "c";
                 }
             case "childroom":
-                return Rez.Drawables.ChildroomIcon;
+                return "°";
             case "deck":
-                return Rez.Drawables.DeckIcon;
+                return "~";
             case "dining":
-                return Rez.Drawables.DiningIcon;
-            case "exec":
-                return Rez.Drawables.Execute;
+                return "|";
             case "favorite":
-                return Rez.Drawables.FavoriteIcon;
-            case "garage":
-                return Rez.Drawables.GarageIcon;
-            case "home":
-                return Rez.Drawables.HomeIcon;
-            case "kitchen":
-                return Rez.Drawables.KitchenIcon;
-            case "living":
-                return Rez.Drawables.LivingIcon;
-            case "lock":
+                return "+";
+            case "flash":
                 if(bOn){
-                    return Rez.Drawables.Locked;
+                    return "F";
                 }
                 else{
-                    return Rez.Drawables.Unlocked;
+                    return "f";
+                }
+            case "garage":
+                return "4";
+            case "home":
+                return "^";
+            case "kitchen":
+                return "&";
+            case "lamp":
+                return ";";
+            case "living":
+                return "-";
+            case "lock":
+                if(bOn){
+                    return "L";
+                }
+                else{
+                    return "l";
                 }
             case "mic":
                 if(bOn){
-                    return Rez.Drawables.MicOn;
+                    return "M";
                 }
                 else{
-                    return Rez.Drawables.MicOff;
-                }
-            case "toggle":
-                if(bOn){
-                    return Rez.Drawables.On;
-                }
-                else{
-                    return Rez.Drawables.Off;
+                    return "m";
                 }
             case "power":
                 if(bOn){
-                    return Rez.Drawables.PowerOn;
+                    return "P";
                 }
                 else{
-                    return Rez.Drawables.PowerOff;
+                    return "p";
                 }
             case "speaker":
-                return Rez.Drawables.SpeakerIcon;
+                return "0";
             case "stairs":
-                return Rez.Drawables.StairsIcon;
-            case "tv":
-                return Rez.Drawables.TVIcon;
-            case "vol-":
-                return Rez.Drawables.VolumeDown;
-            case "vol+":
-                return Rez.Drawables.VolumeUp;
-            case "wc":
-                return Rez.Drawables.WCIcon;
-            case "window":
+                return "%";
+            case "star":
+                return "*";
+            case "thermo":
+                return "!";
+            case "toggle":
                 if(bOn){
-                    return Rez.Drawables.WindowOpen;
+                    return "R";
                 }
                 else{
-                    return Rez.Drawables.WindowClose;
+                    return "r";
                 }
+            case "torch":
+                return ":";
+            case "tv":
+                return "#";
+            case "vol-":
+                return "v";
+            case "vol+":
+                return "V";
+            case "wc":
+                return ".";
             case "work":
-                return Rez.Drawables.WorkIcon;
+                return "$";
             case "yard":
-                return Rez.Drawables.YardIcon;
+                return "?";
             default:
                 throw new Lang.InvalidValueException("Unknown object type: " + sType);
         }
+    }
+
+    function createSpaceIcon(dc, sType){
+        var oIcon = new WatchUi.Text({
+            :text=>getIconId(sType, null),
+            :color=>Graphics.COLOR_YELLOW,
+            :font=>Application.getApp().GioBFont,
+            :justification=>Graphics.TEXT_JUSTIFY_CENTER
+        });
+        return new WatchUi.Button({
+            :locX=>dc.getWidth()/2,
+            :locY=>dc.getHeight()/2 - mTextSize/2,
+            :width=>mTextSize,
+            :height=>mTextSize,
+            :stateDefault=>oIcon,
+            :stateDisabled=>Graphics.COLOR_BLACK,
+            :behavior=>:onRefresh
+        });
     }
 
     function createObject(dc, dObject){
@@ -114,13 +149,21 @@ class SpaceView extends WatchUi.View {
             sFalse = dObject["false"];
         }
         if(dObject["get"] != null && dObject["set"] != null){
-            oIconOff = new WatchUi.Bitmap({:bitmap=>WatchUi.loadResource(getIconId(dObject["type"], false))});
-            oIconOn = new WatchUi.Bitmap({:bitmap=>WatchUi.loadResource(getIconId(dObject["type"], true))});
+            oIconOff = new WatchUi.Text({
+                :text=>getIconId(dObject["type"], false),
+                :color=>Graphics.COLOR_BLUE,
+                :font=>Application.getApp().GioBFont
+            });
+            oIconOn = new WatchUi.Text({
+                :text=>getIconId(dObject["type"], true),
+                :color=>Graphics.COLOR_BLUE,
+                :font=>Application.getApp().GioBFont
+            });
             return new ObjectSwitch({
-                :locX=>dc.getWidth()/2 - oIconOff.width/2,
-                :locY=>dc.getHeight()/2 - oIconOff.height/2,
-                :width=>oIconOff.width,
-                :height=>oIconOff.height,
+                :locX=>dc.getWidth()/2 - mTextSize/2,
+                :locY=>dc.getHeight()/2 - mTextSize/2,
+                :width=>mTextSize,
+                :height=>mTextSize,
                 :stateDefault=>oIconOff,
                 :stateHighlighted=>oIconOn,
                 :stateHighlightedOn=>oIconOn,
@@ -145,13 +188,21 @@ class SpaceView extends WatchUi.View {
                 });
             }
             else{
-                oIconOff = new WatchUi.Bitmap({:bitmap=>WatchUi.loadResource(getIconId(dObject["type"], false))});
-                oIconOn = new WatchUi.Bitmap({:bitmap=>WatchUi.loadResource(getIconId(dObject["type"], true))});
+                oIconOff = new WatchUi.Text({
+                    :text=>getIconId(dObject["type"], false),
+                    :color=>Graphics.COLOR_BLUE,
+                    :font=>Application.getApp().GioBFont
+                });
+                oIconOn = new WatchUi.Text({
+                    :text=>getIconId(dObject["type"], true),
+                    :color=>Graphics.COLOR_BLUE,
+                    :font=>Application.getApp().GioBFont
+                });
                 return new ObjectBitmap({
-                    :locX=>dc.getWidth()/2 - oIconOff.width/2,
-                    :locY=>dc.getHeight()/2 - oIconOff.height/2,
-                    :width=>oIconOff.width,
-                    :height=>oIconOff.height,
+                    :locX=>dc.getWidth()/2 - mTextSize/2,
+                    :locY=>dc.getHeight()/2 - mTextSize/2,
+                    :width=>mTextSize,
+                    :height=>mTextSize,
                     :stateOff=>oIconOff,
                     :stateOn=>oIconOn,
                     :getter=>dObject["get"],
@@ -161,12 +212,16 @@ class SpaceView extends WatchUi.View {
             }
         }
         else{
-            oIcon = new WatchUi.Bitmap({:bitmap=>WatchUi.loadResource(getIconId(dObject["type"], null))});
+            oIcon = new WatchUi.Text({
+                :text=>getIconId(dObject["type"], true),
+                :color=>Graphics.COLOR_BLUE,
+                :font=>Application.getApp().GioBFont
+            });
             return new ObjectButton({
-                :locX=>dc.getWidth()/2 - oIcon.width/2,
-                :locY=>dc.getHeight()/2 - oIcon.height/2,
-                :width=>oIcon.width,
-                :height=>oIcon.height,
+                :locX=>dc.getWidth()/2 - mTextSize/2,
+                :locY=>dc.getHeight()/2 - mTextSize/2,
+                :width=>mTextSize,
+                :height=>mTextSize,
                 :stateDefault=>oIcon,
                 :stateHighlighted=>oIcon,
                 :stateSelected=>oIcon,
@@ -176,21 +231,6 @@ class SpaceView extends WatchUi.View {
                 :mapFalse=>sFalse
             });
         }
-    }
-
-    function createSpaceIcon(dc, sType){
-        var oIcon = new WatchUi.Bitmap({:bitmap=>WatchUi.loadResource(getIconId(sType, null))});
-        return new WatchUi.Button({
-            :locX=>dc.getWidth()/2 - oIcon.width/2,
-            :locY=>dc.getHeight()/2 - oIcon.height/2,
-            :width=>oIcon.width,
-            :height=>oIcon.height,
-            :stateDefault=>oIcon,
-            :stateHighlighted=>oIcon,
-            :stateSelected=>oIcon,
-            :stateDisabled=>Graphics.COLOR_BLACK,
-            :behavior=>:onRefresh
-        });
     }
 
     // Load your resources here

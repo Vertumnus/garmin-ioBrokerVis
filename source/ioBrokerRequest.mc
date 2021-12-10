@@ -19,7 +19,7 @@ class ioBrokerRequest{
     private var mAttribute;
     private var mState;
 
-    private var mDemoState;
+    private var mDataCallback;
 
     private var mTimer;
     private var mGetterRequests;
@@ -29,16 +29,15 @@ class ioBrokerRequest{
         mGetterCallback = getterCallback;
         mFinishCallback = finishCallback;
         mState = Init;
-        mDemoState = Application.loadResource(Rez.JsonData.DemoState);
         mGetterRequests = [];
+    }
+
+    function setDataCallback(dataCallback){
+        mDataCallback = dataCallback;
     }
 
     function hasConnectionError(){
         return mState == NoDefinition;
-    }
-
-    function isDemo(){
-        return Application.Properties.getValue("url").equals("http://www.example.com");
     }
 
     function isFinished(){
@@ -102,19 +101,7 @@ class ioBrokerRequest{
         }
     }
 
-    function loadDemo(){
-        var aDemoData = Application.loadResource(Rez.JsonData.Demo);
-        onDefinitionLoaded(200, aDemoData);
-    }
-
     function loadDefinition(){
-
-        if(isDemo()){
-            System.println("use definition from demo");
-            new Timer.Timer().start(method(:loadDemo), 1000, false);
-            return;
-        }
-
         System.println("load definition from: " + Application.Properties.getValue("defobj"));
         var sUrl = Application.Properties.getValue("url") + "/get/" + Application.Properties.getValue("defobj");
         var dParams = getAuthParameter();
@@ -140,10 +127,11 @@ class ioBrokerRequest{
         mState = RequestGet;
         mAttribute = "val";
 
-        if(isDemo()){
+        if(mDataCallback != null){
             var aStates = [];
             for(var i = 0; i < aIds.size(); ++i){
-                aStates.add({ "id"=>aIds[i], "val"=>mDemoState[aIds[i]] });
+                var value = mDataCallback.invoke(aIds[i], null);
+                aStates.add({ "id"=>aIds[i], "val"=>value });
             }
             onReceive(200, aStates);
             return;
@@ -161,8 +149,8 @@ class ioBrokerRequest{
         mState = RequestSet;
         mAttribute = "value";
 
-        if(isDemo()){
-            mDemoState[id] = value;
+        if(mDataCallback != null){
+            mDataCallback.invoke(id, value);
             onReceive(200, { "id"=>id, "value"=>value });
             return;
         }

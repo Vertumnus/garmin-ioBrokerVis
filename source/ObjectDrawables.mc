@@ -62,11 +62,11 @@ class ObjectBitmap extends WatchUi.Drawable {
     }
 
     function getOffsetX(){
-        return -25;
+        return width / -2;
     }
 
     function getOffsetY(){
-        return -25;
+        return height / -2;
     }
 
     function updateState(value){
@@ -118,11 +118,11 @@ class ObjectButton extends WatchUi.Button{
     }
 
     function getOffsetX(){
-        return -25;
+        return width / -2;
     }
 
     function getOffsetY(){
-        return -25;
+        return height / -2;
     }
 
     function updateState(value){
@@ -165,11 +165,11 @@ class ObjectSwitch extends WatchUi.Selectable {
     }
 
     function getOffsetX(){
-        return -25;
+        return width / -2;
     }
 
     function getOffsetY(){
-        return -25;
+        return height / -2;
     }
 
     function updateState(value){
@@ -228,19 +228,6 @@ class ObjectSwitch extends WatchUi.Selectable {
                     setState(:stateHighlightedOn);
                 }
                 break;
-        }
-    }
-
-(:debug)    function printState(state){
-        switch(state){
-            case :stateDefault:
-                return("Default");
-            case :stateHighlighted:
-                return("Highlight");
-            case :stateHighlightedOn:
-                return("HighlightOn");
-            case :stateSelected:
-                return("Selected");
         }
     }
 }
