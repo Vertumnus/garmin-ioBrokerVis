@@ -24,6 +24,8 @@ class ioBrokerRequest{
     private var mTimer;
     private var mGetterRequests;
 
+    public var mErrorCode;
+
     function initialize(getterCallback, definitionCallback, finishCallback){
         mDefinitionCallback = definitionCallback;
         mGetterCallback = getterCallback;
@@ -112,6 +114,7 @@ class ioBrokerRequest{
     }
 
     function onDefinitionLoaded(code, data){
+        mErrorCode = code;
         if(code == 200){
             mState = Loaded;
             mDefinitionCallback.invoke(data["native"]["spaces"]);

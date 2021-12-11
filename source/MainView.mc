@@ -37,6 +37,11 @@ class MainView extends WatchUi.View {
 
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
         dc.drawCircle(dc.getWidth() / 2, dc.getHeight() / 2, 70);
+
+        var err = Application.getApp().mIoRequest.mErrorCode;
+        if(err != null && err != 200){
+            dc.drawText(dc.getWidth() / 2, dc.getHeight() * 80 / 100, Graphics.FONT_XTINY, err, Graphics.TEXT_JUSTIFY_CENTER);
+        }
     }
 
     // Called when this View is removed from the screen. Save the

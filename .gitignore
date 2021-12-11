@@ -1,3 +1,5 @@
 .id
 .vscode
 bin
+temp
+export

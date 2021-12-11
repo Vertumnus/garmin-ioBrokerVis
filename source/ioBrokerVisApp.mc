@@ -7,7 +7,7 @@ class ioBrokerVisApp extends Application.AppBase {
     private var mSpaces;
     private var mCurrentSpace;
     private var mIoStates;
-    private var mIoRequest;
+    public var mIoRequest;
     private var mViewItems;
 
     private var mDemoStates;
