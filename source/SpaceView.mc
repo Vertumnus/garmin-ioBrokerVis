@@ -122,10 +122,20 @@ class SpaceView extends WatchUi.View {
         }
     }
 
-    function createSpaceIcon(dc, sType){
+    function getColor(sColor, defaultColor){
+        if(sColor == null){
+            return defaultColor;
+        }
+        if(sColor.find("#") == 0){
+            return sColor.substring(1, sColor.length()).toNumberWithBase(16);
+        }
+        return sColor.toNumberWithBase(0);
+    }
+
+    function createSpaceIcon(dc, dSpace){
         var oIcon = new WatchUi.Text({
-            :text=>getIconId(sType, null),
-            :color=>Graphics.COLOR_YELLOW,
+            :text=>getIconId(dSpace["icon"], null),
+            :color=>getColor(dSpace["color"], Graphics.COLOR_YELLOW),
             :font=>Application.getApp().GioBFont,
             :justification=>Graphics.TEXT_JUSTIFY_CENTER
         });
@@ -151,12 +161,12 @@ class SpaceView extends WatchUi.View {
         if(dObject["get"] != null && dObject["set"] != null){
             oIconOff = new WatchUi.Text({
                 :text=>getIconId(dObject["type"], false),
-                :color=>Graphics.COLOR_BLUE,
+                :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                 :font=>Application.getApp().GioBFont
             });
             oIconOn = new WatchUi.Text({
                 :text=>getIconId(dObject["type"], true),
-                :color=>Graphics.COLOR_BLUE,
+                :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                 :font=>Application.getApp().GioBFont
             });
             return new ObjectSwitch({
@@ -190,12 +200,12 @@ class SpaceView extends WatchUi.View {
             else{
                 oIconOff = new WatchUi.Text({
                     :text=>getIconId(dObject["type"], false),
-                    :color=>Graphics.COLOR_BLUE,
+                    :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                     :font=>Application.getApp().GioBFont
                 });
                 oIconOn = new WatchUi.Text({
                     :text=>getIconId(dObject["type"], true),
-                    :color=>Graphics.COLOR_BLUE,
+                    :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                     :font=>Application.getApp().GioBFont
                 });
                 return new ObjectBitmap({
@@ -214,7 +224,7 @@ class SpaceView extends WatchUi.View {
         else{
             oIcon = new WatchUi.Text({
                 :text=>getIconId(dObject["type"], true),
-                :color=>Graphics.COLOR_BLUE,
+                :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                 :font=>Application.getApp().GioBFont
             });
             return new ObjectButton({
@@ -244,7 +254,7 @@ class SpaceView extends WatchUi.View {
         Application.getApp().setViewItems(aViewItems);
 
         var aDraws = [];
-        aDraws.add(createSpaceIcon(dc, dSpace["icon"]));
+        aDraws.add(createSpaceIcon(dc, dSpace));
         aDraws.addAll(aViewItems);
         setLayout(aDraws);
 

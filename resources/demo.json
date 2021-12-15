@@ -13,6 +13,7 @@
             },
             {
                 "icon": "home",
+                "color": "#AAAAAA",
                 "objects": [
                     {
                         "type": "power",
@@ -21,6 +22,7 @@
                     },
                     {
                         "type": "check",
+                        "color": "0xFF5500",
                         "get": "check",
                         "set": "check"
                     }
@@ -28,19 +30,23 @@
             },
             {
                 "icon": "garage",
+                "color": "0x0000FF",
                 "objects": [
                     {
                         "type": "lock",
+                        "color": "#555555",
                         "get": "lock",
                         "set": "lock"
                     },
                     {
                         "type": "power",
+                        "color": "0xAA0000",
                         "get": "power",
                         "set": "power"
                     },
                     {
                         "type": "flash",
+                        "color": "0xFFAA00",
                         "get": "flash",
                         "set": "flash"
                     }
@@ -89,6 +95,7 @@
                     },
                     {
                         "type": "mic",
+                        "color": "#AA00FF",
                         "get": "mic",
                         "set": "mic"
                     },
@@ -174,6 +181,7 @@
             },
             {
                 "icon": "living",
+                "color": "0x00AA00",
                 "objects": [
                     {
                         "type": "power",
@@ -182,6 +190,7 @@
                     },
                     {
                         "type": "check",
+                        "color": "#00FF00",
                         "get": "check",
                         "set": "check"
                     },

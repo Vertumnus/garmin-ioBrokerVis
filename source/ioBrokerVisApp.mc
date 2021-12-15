@@ -57,7 +57,7 @@ class ioBrokerVisApp extends Application.AppBase {
 
     function getIoState(id, oMethod){
         if(mIoRequest.isFinished()){
-            oMethod.invoke(id, (mIoStates[id])?mIoStates[id]:"");
+            oMethod.invoke(id, (mIoStates[id] != null)?mIoStates[id]:"");
         }
         else{
             mIoRequest.waitGetState({ "id"=>id, "meth"=>oMethod }, method(:getIoState));
