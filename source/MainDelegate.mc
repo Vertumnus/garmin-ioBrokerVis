@@ -7,10 +7,7 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(oClickEvent){
-        if(Application.getApp().isSpaceReady()){
-            Application.getApp().requestCurrentIoStates();
-            WatchUi.pushView(new SpaceView(), new SpaceDelegate(), WatchUi.SLIDE_LEFT);
-        }
+        Application.getApp().connect();
     }
 
 }

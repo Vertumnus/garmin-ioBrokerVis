@@ -185,32 +185,36 @@
                 "objects": [
                     {
                         "type": "power",
+                        "color": "#FFAA00",
                         "get": "power",
                         "set": "power"
                     },
                     {
                         "type": "check",
-                        "color": "#00FF00",
                         "get": "check",
                         "set": "check"
                     },
                     {
                         "type": "toggle",
+                        "color": "#FF5500",
                         "get": "media",
                         "set": "media"
                     },
                     {
                         "type": "lock",
+                        "color": "0x555555",
                         "get": "lock",
                         "set": "lock"
                     },
                     {
                         "type": "mic",
+                        "color": "0xAA00FF",
                         "get": "mic",
                         "set": "mic"
                     },
                     {
                         "type": "vol-",
+                        "color": "#FF0000",
                         "set": "vol",
                         "com": "-"
                     },
@@ -220,6 +224,7 @@
                     },
                     {
                         "type": "vol+",
+                        "color": "#00FF00",
                         "set": "vol",
                         "com": "+"
                     }

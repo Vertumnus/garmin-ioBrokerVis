@@ -32,6 +32,9 @@ class MainView extends WatchUi.View {
             case Communications.INVALID_HTTP_HEADER_FIELDS_IN_REQUEST:
                 text = "Request issue (" + err + ")";
                 break;
+            case Communications.BLE_CONNECTION_UNAVAILABLE:
+                text = "No Connection";
+                break;
             case 400:
                 text = "Bad Request";
                 break;

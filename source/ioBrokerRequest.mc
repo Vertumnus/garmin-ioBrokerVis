@@ -89,6 +89,7 @@ class ioBrokerRequest{
             return;
         }
         mTimer = new Timer.Timer();
+        // give the system some time to perform the response
         mTimer.start(method(:checkState), 100, true);
     }
 
@@ -104,6 +105,7 @@ class ioBrokerRequest{
     }
 
     function loadDefinition(){
+        mState = Init;
         System.println("load definition from: " + Application.Properties.getValue("defobj"));
         var sUrl = Application.Properties.getValue("url") + "/get/" + Application.Properties.getValue("defobj");
         var dParams = getAuthParameter();

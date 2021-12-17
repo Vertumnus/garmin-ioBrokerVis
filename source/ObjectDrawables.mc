@@ -4,12 +4,15 @@ class ObjectText extends WatchUi.Text {
 
     private var getterId;
     private var unitText;
+    private var decimalPrecision;
 
     function initialize(settings){
         WatchUi.Text.initialize(settings);
 
         getterId = settings.get(:getter);
         unitText = settings.get(:unit);
+        decimalPrecision = settings.get(:precision);
+        decimalPrecision = (decimalPrecision == null) ? 0 : decimalPrecision.toNumber();
 
         updateState(null);
     }
@@ -27,7 +30,19 @@ class ObjectText extends WatchUi.Text {
     }
 
     function onIoState(id, value){
-        var text = value.toString();
+        var text = "";
+        switch(value){
+            case instanceof String:
+                text = value;
+                break;
+            default:
+                var pattern = "%d";
+                if(decimalPrecision >= 0){
+                    pattern = Lang.format("%1.$1$f", [decimalPrecision.format("%d")]);
+                }
+                text = value.format(pattern);
+                break;
+        }
         if(unitText != null){
             text += unitText;
         }

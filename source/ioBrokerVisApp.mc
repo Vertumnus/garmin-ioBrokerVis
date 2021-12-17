@@ -43,10 +43,22 @@ class ioBrokerVisApp extends Application.AppBase {
         return mDemoStates[id];
     }
 
-    function connect(){
+    function showProgressBar(){
         WatchUi.pushView(new WatchUi.ProgressBar("...I.O...", null), null, WatchUi.SLIDE_BLINK);
+    }
+
+    function closeProgressBar(){
+        WatchUi.popView(WatchUi.SLIDE_LEFT);
+    }
+
+    function connect(){
+        mSpaces = [];
+        mCurrentSpace = 0;
+        mIoStates = {};
+        showProgressBar();
         if(isDemo()){
             mIoRequest.setDataCallback(method(:onDemoData));
+            // take a second to enjoy the progress bar
             new Timer.Timer().start(method(:loadDemo), 1000, false);
         }
         else{
@@ -103,7 +115,16 @@ class ioBrokerVisApp extends Application.AppBase {
         if(spaces != null){
             mSpaces = spaces;
         }
-        WatchUi.popView(WatchUi.SLIDE_LEFT);
+        // give the system some time to handle view stack (otherwise the app crashes)
+        new Timer.Timer().start(method(:afterDefinitionLoaded), 10, false);
+    }
+
+    function afterDefinitionLoaded(){
+        closeProgressBar();
+        if(isSpaceReady()){
+            requestCurrentIoStates();
+            WatchUi.pushView(new SpaceView(), new SpaceDelegate(), WatchUi.SLIDE_LEFT);
+        }
     }
 
     function onRequestFinished(){
@@ -171,9 +192,6 @@ class ioBrokerVisApp extends Application.AppBase {
     }
 
     function onSettingsChanged() {
-        mSpaces = [];
-        mCurrentSpace = 0;
-        mIoStates = {};
         connect();
     }
 
