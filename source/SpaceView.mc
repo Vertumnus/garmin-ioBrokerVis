@@ -270,8 +270,7 @@ class SpaceView extends WatchUi.View {
         var oIcon = new BaseText({
             :text=>getIconId(dSpace["icon"], null),
             :color=>getColor(dSpace["color"], Graphics.COLOR_YELLOW),
-            :font=>Application.getApp().GioBFont,
-            :justification=>Graphics.TEXT_JUSTIFY_CENTER
+            :font=>Application.getApp().GioBFont
         });
         return new WatchUi.Button({
             :locX=>dc.getWidth()/2,
@@ -304,7 +303,7 @@ class SpaceView extends WatchUi.View {
                 :font=>Application.getApp().GioBFont
             });
             return new ObjectSwitch({
-                :locX=>dc.getWidth()/2 - mTextSize/2,
+                :locX=>dc.getWidth()/2,
                 :locY=>dc.getHeight()/2 - mTextSize/2,
                 :width=>mTextSize,
                 :height=>mTextSize,
@@ -325,7 +324,6 @@ class SpaceView extends WatchUi.View {
                     return new ObjectText({
                         :locX=>dc.getWidth()/2,
                         :locY=>dc.getHeight()/2,
-                        :justification=>Graphics.TEXT_JUSTIFY_CENTER,
                         :font=>Graphics.FONT_TINY,
                         :text=>"?",
                         :getter=>dObject["get"],
@@ -346,7 +344,6 @@ class SpaceView extends WatchUi.View {
                             oIcon = new BaseText({
                                 :text=>getIconId(scope["type"], null),
                                 :color=>getColor((scope["color"] == null ? dObject["color"] : scope["color"]), Graphics.COLOR_BLUE),
-                                :justification=>Graphics.TEXT_JUSTIFY_CENTER,
                                 :font=>Application.getApp().GioBFont
                             });
                         }
@@ -355,7 +352,6 @@ class SpaceView extends WatchUi.View {
                     return new ObjectState({
                         :locX=>dc.getWidth()/2,
                         :locY=>dc.getHeight()/2,
-                        :justification=>Graphics.TEXT_JUSTIFY_CENTER,
                         :scopes=>scopes,
                         :getter=>dObject["get"],
                         :unit=>dObject["unit"],
@@ -375,7 +371,6 @@ class SpaceView extends WatchUi.View {
                     return new ObjectState({
                         :locX=>dc.getWidth()/2,
                         :locY=>dc.getHeight()/2,
-                        :justification=>Graphics.TEXT_JUSTIFY_CENTER,
                         :scopes=>[{ "value"=>false, "icon"=>oIconOff },{ "value"=>true, "icon"=>oIconOn }],
                         :getter=>dObject["get"],
                         :mapTrue=>sTrue,
@@ -390,7 +385,7 @@ class SpaceView extends WatchUi.View {
                 :font=>Application.getApp().GioBFont
             });
             return new ObjectButton({
-                :locX=>dc.getWidth()/2 - mTextSize/2,
+                :locX=>dc.getWidth()/2,
                 :locY=>dc.getHeight()/2 - mTextSize/2,
                 :width=>mTextSize,
                 :height=>mTextSize,

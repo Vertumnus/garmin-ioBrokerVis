@@ -4,6 +4,8 @@ class BaseText extends WatchUi.Text {
 
     function initialize(settings){
         WatchUi.Text.initialize(settings);
+
+        setJustification(Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function getFont(){
@@ -187,7 +189,7 @@ class ObjectButton extends WatchUi.Button{
     }
 
     function getOffsetX(){
-        return width / -2;
+        return 0;
     }
 
     function getOffsetY(){
@@ -234,7 +236,7 @@ class ObjectSwitch extends WatchUi.Selectable {
     }
 
     function getOffsetX(){
-        return width / -2;
+        return 0;
     }
 
     function getOffsetY(){
