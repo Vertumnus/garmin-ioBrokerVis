@@ -267,7 +267,7 @@ class SpaceView extends WatchUi.View {
     }
 
     function createSpaceIcon(dc, dSpace){
-        var oIcon = new WatchUi.Text({
+        var oIcon = new BaseText({
             :text=>getIconId(dSpace["icon"], null),
             :color=>getColor(dSpace["color"], Graphics.COLOR_YELLOW),
             :font=>Application.getApp().GioBFont,
@@ -293,12 +293,12 @@ class SpaceView extends WatchUi.View {
             sFalse = dObject["false"];
         }
         if(dObject["get"] != null && dObject["set"] != null){
-            oIconOff = new WatchUi.Text({
+            oIconOff = new BaseText({
                 :text=>getIconId(dObject["type"], false),
                 :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                 :font=>Application.getApp().GioBFont
             });
-            oIconOn = new WatchUi.Text({
+            oIconOn = new BaseText({
                 :text=>getIconId(dObject["type"], true),
                 :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                 :font=>Application.getApp().GioBFont
@@ -320,44 +320,71 @@ class SpaceView extends WatchUi.View {
             });
         }
         else if(dObject["get"] != null){
-            if(dObject["type"].equals("text")){
-                return new ObjectText({
-                    :locX=>dc.getWidth()/2,
-                    :locY=>dc.getHeight()/2,
-                    :justification=>Graphics.TEXT_JUSTIFY_CENTER,
-                    :font=>Graphics.FONT_TINY,
-                    :text=>"?",
-                    :getter=>dObject["get"],
-                    :unit=>dObject["unit"],
-                    :precision=>dObject["precision"]
-                });
-            }
-            else{
-                oIconOff = new WatchUi.Text({
-                    :text=>getIconId(dObject["type"], false),
-                    :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
-                    :font=>Application.getApp().GioBFont
-                });
-                oIconOn = new WatchUi.Text({
-                    :text=>getIconId(dObject["type"], true),
-                    :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
-                    :font=>Application.getApp().GioBFont
-                });
-                return new ObjectBitmap({
-                    :locX=>dc.getWidth()/2 - mTextSize/2,
-                    :locY=>dc.getHeight()/2 - mTextSize/2,
-                    :width=>mTextSize,
-                    :height=>mTextSize,
-                    :stateOff=>oIconOff,
-                    :stateOn=>oIconOn,
-                    :getter=>dObject["get"],
-                    :mapTrue=>sTrue,
-                    :mapFalse=>sFalse
-                });
+            switch(dObject["type"]){
+                case "text":
+                    return new ObjectText({
+                        :locX=>dc.getWidth()/2,
+                        :locY=>dc.getHeight()/2,
+                        :justification=>Graphics.TEXT_JUSTIFY_CENTER,
+                        :font=>Graphics.FONT_TINY,
+                        :text=>"?",
+                        :getter=>dObject["get"],
+                        :unit=>dObject["unit"],
+                        :precision=>dObject["precision"]
+                    });
+                case "state":
+                    var scopes = [];
+                    var color;
+                    for(var i = 0; i < dObject["scopes"].size(); ++i){
+                        var scope = dObject["scopes"][i];
+                        if(scope["type"].equals("text")){
+                            oIcon = null;
+                            color = getColor((scope["color"] == null ? dObject["color"] : scope["color"]), Graphics.COLOR_WHITE);
+                        }
+                        else{
+                            color = null;
+                            oIcon = new BaseText({
+                                :text=>getIconId(scope["type"], null),
+                                :color=>getColor((scope["color"] == null ? dObject["color"] : scope["color"]), Graphics.COLOR_BLUE),
+                                :justification=>Graphics.TEXT_JUSTIFY_CENTER,
+                                :font=>Application.getApp().GioBFont
+                            });
+                        }
+                        scopes.add({ "value"=>scope["value"], "min"=>scope["min"], "max"=>scope["max"], "icon"=>oIcon, "color"=>color });
+                    }
+                    return new ObjectState({
+                        :locX=>dc.getWidth()/2,
+                        :locY=>dc.getHeight()/2,
+                        :justification=>Graphics.TEXT_JUSTIFY_CENTER,
+                        :scopes=>scopes,
+                        :getter=>dObject["get"],
+                        :unit=>dObject["unit"],
+                        :precision=>dObject["precision"]
+                    });
+                default:
+                    oIconOff = new BaseText({
+                        :text=>getIconId(dObject["type"], false),
+                        :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
+                        :font=>Application.getApp().GioBFont
+                    });
+                    oIconOn = new BaseText({
+                        :text=>getIconId(dObject["type"], true),
+                        :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
+                        :font=>Application.getApp().GioBFont
+                    });
+                    return new ObjectState({
+                        :locX=>dc.getWidth()/2,
+                        :locY=>dc.getHeight()/2,
+                        :justification=>Graphics.TEXT_JUSTIFY_CENTER,
+                        :scopes=>[{ "value"=>false, "icon"=>oIconOff },{ "value"=>true, "icon"=>oIconOn }],
+                        :getter=>dObject["get"],
+                        :mapTrue=>sTrue,
+                        :mapFalse=>sFalse
+                    });
             }
         }
         else{
-            oIcon = new WatchUi.Text({
+            oIcon = new BaseText({
                 :text=>getIconId(dObject["type"], true),
                 :color=>getColor(dObject["color"], Graphics.COLOR_BLUE),
                 :font=>Application.getApp().GioBFont

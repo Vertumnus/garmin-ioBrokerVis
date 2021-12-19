@@ -1,13 +1,24 @@
 using Toybox.WatchUi;
 
-class ObjectText extends WatchUi.Text {
-
-    private var getterId;
-    private var unitText;
-    private var decimalPrecision;
+class BaseText extends WatchUi.Text {
 
     function initialize(settings){
         WatchUi.Text.initialize(settings);
+    }
+
+    function getFont(){
+        return mFont;
+    }
+}
+
+class ObjectText extends BaseText {
+
+    protected var getterId;
+    protected var unitText;
+    protected var decimalPrecision;
+
+    function initialize(settings){
+        BaseText.initialize(settings);
 
         getterId = settings.get(:getter);
         unitText = settings.get(:unit);
@@ -25,11 +36,7 @@ class ObjectText extends WatchUi.Text {
         return Graphics.getFontHeight(mFont) / -2;
     }
 
-    function updateState(value){
-        Application.getApp().getIoState(getterId, method(:onIoState));
-    }
-
-    function onIoState(id, value){
+    function buildText(value){
         var text = "";
         switch(value){
             case instanceof String:
@@ -46,42 +53,7 @@ class ObjectText extends WatchUi.Text {
         if(unitText != null){
             text += unitText;
         }
-        setText(text);
-    }
-
-}
-
-class ObjectBitmap extends WatchUi.Drawable {
-
-    var stateOn;
-    var stateOff;
-    var currentState;
-
-    private var getterId;
-    private var mappingTrue;
-    private var mappingFalse;
-
-    function initialize(settings){
-        WatchUi.Drawable.initialize(settings);
-
-        getterId = settings.get(:getter);
-        mappingTrue = settings.get(:mapTrue);
-        mappingFalse = settings.get(:mapFalse);
-
-        stateOn = settings.get(:stateOn);
-        stateOff = settings.get(:stateOff);
-
-        currentState = stateOff;
-
-        updateState(null);
-    }
-
-    function getOffsetX(){
-        return width / -2;
-    }
-
-    function getOffsetY(){
-        return height / -2;
+        return text;
     }
 
     function updateState(value){
@@ -89,12 +61,92 @@ class ObjectBitmap extends WatchUi.Drawable {
     }
 
     function onIoState(id, value){
-        if(mapFrom(value)){
-            currentState = stateOn;
+        setText(buildText(value));
+    }
+}
+
+class ObjectState extends ObjectText {
+
+    private var allScopes;
+    private var currentState;
+    private var scopeText;
+
+    private var mappingTrue;
+    private var mappingFalse;
+
+    function initialize(settings){
+        ObjectText.initialize(settings);
+
+        mappingTrue = settings.get(:mapTrue);
+        mappingFalse = settings.get(:mapFalse);
+
+        allScopes = settings.get(:scopes);
+        currentState = null;
+
+        updateState(null);
+    }
+
+    function getOffsetY(){
+        if(currentState == null){
+            return 0;
         }
         else{
-            currentState = stateOff;
+            return Graphics.getFontHeight(currentState.getFont()) / -2;
         }
+    }
+
+    function updateState(value){
+        Application.getApp().getIoState(getterId, method(:onIoState));
+    }
+
+    function findScope(value){
+        var scope = null;
+        for(var i = 0; i < allScopes.size(); ++i){
+            if(allScopes[i]["value"] != null){
+                if(value.toString().equals(allScopes[i]["value"].toString())){
+                    scope = allScopes[i];
+                    break;
+                }
+            }
+            else if(allScopes[i]["min"] == null){
+                if(value.toNumber() <= allScopes[i]["max"].toNumber()){
+                    scope = allScopes[i];
+                    break;
+                }
+            }
+            else if(allScopes[i]["max"] == null){
+                if(value.toNumber() >= allScopes[i]["min"].toNumber()){
+                    scope = allScopes[i];
+                    break;
+                }
+            }
+            else{
+                if(value.toNumber() >= allScopes[i]["min"].toNumber() && value.toNumber() <= allScopes[i]["max"].toNumber()){
+                    scope = allScopes[i];
+                    break;
+                }
+            }
+        }
+        if(scope == null){
+            return null;
+        }
+        if(scope["icon"] != null){
+            return scope["icon"];
+        }
+        if(scopeText == null){
+            scopeText = new BaseText({
+                :justification=>Graphics.TEXT_JUSTIFY_CENTER,
+                :font=>Graphics.FONT_TINY,
+                :text=>"?"
+            });
+        }
+        scopeText.setText(buildText(value));
+        scopeText.setColor(scope["color"]);
+        return scopeText;
+    }
+
+    function onIoState(id, value){
+        currentState = findScope(mapFrom(value));
     }
 
     function mapFrom(value){
@@ -105,8 +157,10 @@ class ObjectBitmap extends WatchUi.Drawable {
     }
 
     function draw(dc){
-        currentState.setLocation(locX, locY);
-        currentState.draw(dc);
+        if(currentState != null){
+            currentState.setLocation(locX + getOffsetX(), locY + getOffsetY());
+            currentState.draw(dc);
+        }
     }
 }
 
