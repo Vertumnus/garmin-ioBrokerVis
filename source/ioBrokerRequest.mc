@@ -193,6 +193,9 @@ class ioBrokerRequest{
         else{
             mState = Error;
             System.println("IO State - error code: " + code);
+            if(mGetterCallback != null){
+                mGetterCallback.invoke(null, null); // calling with null indicates error
+            }
         }
     }
 }

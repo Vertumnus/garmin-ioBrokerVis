@@ -63,7 +63,7 @@
                     {
                         "type": "vol+",
                         "set": "vol",
-                        "com": "+"
+                        "value": "+"
                     },
                     {
                         "type": "text",
@@ -72,7 +72,7 @@
                     {
                         "type": "vol-",
                         "set": "vol",
-                        "com": "-"
+                        "value": "-"
                     }
                 ]
             },
@@ -86,7 +86,7 @@
                     {
                         "type": "vol+",
                         "set": "vol",
-                        "com": "+"
+                        "value": "+"
                     },
                     {
                         "type": "toggle",
@@ -102,7 +102,7 @@
                     {
                         "type": "vol-",
                         "set": "vol",
-                        "com": "-"
+                        "value": "-"
                     }
                 ]
             },
@@ -216,7 +216,7 @@
                         "type": "vol-",
                         "color": "#FF0000",
                         "set": "vol",
-                        "com": "-"
+                        "value": "-"
                     },
                     {
                         "type": "text",
@@ -226,7 +226,7 @@
                         "type": "vol+",
                         "color": "#00FF00",
                         "set": "vol",
-                        "com": "+"
+                        "value": "+"
                     }
                 ]
             }

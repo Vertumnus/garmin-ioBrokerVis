@@ -325,6 +325,7 @@ class SpaceView extends WatchUi.View {
                         :locX=>dc.getWidth()/2,
                         :locY=>dc.getHeight()/2,
                         :font=>Graphics.FONT_TINY,
+                        :color=>getColor(dObject["color"], Graphics.COLOR_WHITE),
                         :text=>"?",
                         :getter=>dObject["get"],
                         :unit=>dObject["unit"],
@@ -394,8 +395,7 @@ class SpaceView extends WatchUi.View {
                 :stateSelected=>oIcon,
                 :stateDisabled=>Graphics.COLOR_BLACK,
                 :setter=>dObject["set"],
-                :mapTrue=>sTrue,
-                :mapFalse=>sFalse
+                :command=>dObject["value"]
             });
         }
     }

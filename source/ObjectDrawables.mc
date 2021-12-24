@@ -15,6 +15,8 @@ class BaseText extends WatchUi.Text {
 
 class ObjectText extends BaseText {
 
+    protected var busy;
+
     protected var getterId;
     protected var unitText;
     protected var decimalPrecision;
@@ -27,7 +29,11 @@ class ObjectText extends BaseText {
         decimalPrecision = settings.get(:precision);
         decimalPrecision = (decimalPrecision == null) ? 0 : decimalPrecision.toNumber();
 
-        updateState(null);
+        busy = false;
+
+        if(settings["noupdate"] == null || settings["noupdate"] == false){
+            updateState(null);
+        }
     }
 
     function getOffsetX(){
@@ -59,11 +65,18 @@ class ObjectText extends BaseText {
     }
 
     function updateState(value){
+        if(busy == true){
+            return;
+        }
+        busy = true;
         Application.getApp().getIoState(getterId, method(:onIoState));
     }
 
     function onIoState(id, value){
-        setText(buildText(value));
+        if(id != null){
+            setText(buildText(value));
+        }
+        busy = false;
     }
 }
 
@@ -77,6 +90,7 @@ class ObjectState extends ObjectText {
     private var mappingFalse;
 
     function initialize(settings){
+        settings["noupdate"] = true;
         ObjectText.initialize(settings);
 
         mappingTrue = settings.get(:mapTrue);
@@ -98,6 +112,10 @@ class ObjectState extends ObjectText {
     }
 
     function updateState(value){
+        if(busy == true){
+            return;
+        }
+        busy = true;
         Application.getApp().getIoState(getterId, method(:onIoState));
     }
 
@@ -148,7 +166,10 @@ class ObjectState extends ObjectText {
     }
 
     function onIoState(id, value){
-        currentState = findScope(mapFrom(value));
+        if(id != null){
+            currentState = findScope(mapFrom(value));
+        }
+        busy = false;
     }
 
     function mapFrom(value){
@@ -170,16 +191,12 @@ class ObjectButton extends WatchUi.Button{
 
     private var setterId;
     private var commandValue;
-    private var mappingTrue;
-    private var mappingFalse;
 
     function initialize(settings){
         WatchUi.Button.initialize(settings);
 
         setterId = settings.get(:setter);
         commandValue = settings.get(:command);
-        mappingTrue = settings.get(:mapTrue);
-        mappingFalse = settings.get(:mapFalse);
 
         updateState(null);
     }
@@ -198,18 +215,8 @@ class ObjectButton extends WatchUi.Button{
 
     function updateState(value){
         if(value != null){
-            Application.getApp().setIoState(setterId, mapTo(value), null);
+            Application.getApp().setIoState(setterId, value, null);
         }
-    }
-
-    function mapTo(value){
-        if(value && mappingTrue != null){
-            return mappingTrue;
-        }
-        if(!value && mappingFalse != null){
-            return mappingFalse;
-        }
-        return value;
     }
 }
 
@@ -222,6 +229,8 @@ class ObjectSwitch extends WatchUi.Selectable {
     private var mappingTrue;
     private var mappingFalse;
 
+    private var busy;
+
     function initialize(settings) {
         WatchUi.Selectable.initialize(settings);
 
@@ -231,6 +240,8 @@ class ObjectSwitch extends WatchUi.Selectable {
         setterId = settings.get(:setter);
         mappingTrue = settings.get(:mapTrue);
         mappingFalse = settings.get(:mapFalse);
+
+        busy = false;
 
         updateState(null);
     }
@@ -244,6 +255,10 @@ class ObjectSwitch extends WatchUi.Selectable {
     }
 
     function updateState(value){
+        if(busy == true){
+            return;
+        }
+        busy = true;
         if(value != null){
             Application.getApp().setIoState(setterId, mapTo(value), method(:onIoState));
         }
@@ -253,12 +268,15 @@ class ObjectSwitch extends WatchUi.Selectable {
     }
 
     function onIoState(id, value){
-        if(mapFrom(value)){
-            setState(:stateHighlightedOn);
+        if(id != null){
+            if(mapFrom(value)){
+                setState(:stateHighlightedOn);
+            }
+            else{
+                setState(:stateDefault);
+            }
         }
-        else{
-            setState(:stateDefault);
-        }
+        busy = false;
     }
 
     function mapFrom(value){
