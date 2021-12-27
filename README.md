@@ -52,9 +52,9 @@ You need somewhere an object with a special configuration. Currently you have to
 
 > __Recommendation:__ Create it under `0_userdata.0`, e.g. `0_userdata.0.garmin` as type `device`. Be sure that your used user for the simple-api has the authorizations to read this object.
 
-After the creation you have to modify the object. At the object data tab you can see the object configuration in JSON format. You must create or modify the attribute `native`:
+After the creation you have to modify the object. At the object data tab you can see the object configuration in js format. You must create or modify the attribute `native`:
 
-```json
+```js
 {
     "common": {
         "name": ...
@@ -70,7 +70,7 @@ After the creation you have to modify the object. At the object data tab you can
 
 As already described, the UI is separated into _Spaces_, so you must define first those in an Array:
 
-```json
+```js
 ...
     "native": {
         "spaces": [
@@ -89,7 +89,7 @@ Each _Space_ has two attributes for visualization. The `icon` and a `color`. See
 
 As you know a _Space_ exists of _Objects_, so you have to specify them too inside:
 
-```json
+```js
 ...
     "native": {
         "spaces": [
@@ -113,7 +113,7 @@ An _Object_ has always a `type`. The type could be an icon (see [list](#icon-lis
 The type _text_ needs the additional attribute `get`, where you must specify the state in your ioBroker object list, which has to be read. Additionally you can specify a `unit` as postfix and a `precision` of the decimal places for numbers (rounded).
 
 > Example: Show the temperature -> 21.5°C
-> ```json
+> ```js
 >   ...
 >   {
 >       "type": "text",
@@ -129,7 +129,7 @@ If you have a similar state to a boolean state, you must configure a mapping. Th
 The command needs additionally the attribute `value`. This attribute contains the value, which has to be sent to the state in ioBroker.
 
 > Example: Switch for a bulb (where the state has the values `on` and `off`) and Command to start a timer
-> ```json
+> ```js
 >   ...
 >   {
 >       "type": "bulb",
@@ -152,7 +152,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 > __Consider:__ The widget checks the _Scopes_ in the specified order; first come, first serve. So if you have an overlap the first fitting _Scope_ wins.
 
 > Example: Show temperature as colored text or icon, if it is too cold or too hot
-> ```json
+> ```js
 >   ...
 >   {
 >       "type": "state",
