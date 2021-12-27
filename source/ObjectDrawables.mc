@@ -15,8 +15,6 @@ class BaseText extends WatchUi.Text {
 
 class ObjectText extends BaseText {
 
-    protected var busy;
-
     protected var getterId;
     protected var unitText;
     protected var decimalPrecision;
@@ -28,12 +26,6 @@ class ObjectText extends BaseText {
         unitText = settings.get(:unit);
         decimalPrecision = settings.get(:precision);
         decimalPrecision = (decimalPrecision == null) ? 0 : decimalPrecision.toNumber();
-
-        busy = false;
-
-        if(settings["noupdate"] == null || settings["noupdate"] == false){
-            updateState(null);
-        }
     }
 
     function getOffsetX(){
@@ -65,10 +57,6 @@ class ObjectText extends BaseText {
     }
 
     function updateState(value){
-        if(busy == true){
-            return;
-        }
-        busy = true;
         Application.getApp().getIoState(getterId, method(:onIoState));
     }
 
@@ -76,7 +64,6 @@ class ObjectText extends BaseText {
         if(id != null){
             setText(buildText(value));
         }
-        busy = false;
     }
 }
 
@@ -98,8 +85,6 @@ class ObjectState extends ObjectText {
 
         allScopes = settings.get(:scopes);
         currentState = null;
-
-        updateState(null);
     }
 
     function getOffsetY(){
@@ -112,10 +97,6 @@ class ObjectState extends ObjectText {
     }
 
     function updateState(value){
-        if(busy == true){
-            return;
-        }
-        busy = true;
         Application.getApp().getIoState(getterId, method(:onIoState));
     }
 
@@ -169,7 +150,6 @@ class ObjectState extends ObjectText {
         if(id != null){
             currentState = findScope(mapFrom(value));
         }
-        busy = false;
     }
 
     function mapFrom(value){
@@ -197,8 +177,6 @@ class ObjectButton extends WatchUi.Button{
 
         setterId = settings.get(:setter);
         commandValue = settings.get(:command);
-
-        updateState(null);
     }
 
     function execute(){
@@ -229,8 +207,6 @@ class ObjectSwitch extends WatchUi.Selectable {
     private var mappingTrue;
     private var mappingFalse;
 
-    private var busy;
-
     function initialize(settings) {
         WatchUi.Selectable.initialize(settings);
 
@@ -240,10 +216,6 @@ class ObjectSwitch extends WatchUi.Selectable {
         setterId = settings.get(:setter);
         mappingTrue = settings.get(:mapTrue);
         mappingFalse = settings.get(:mapFalse);
-
-        busy = false;
-
-        updateState(null);
     }
 
     function getOffsetX(){
@@ -255,10 +227,6 @@ class ObjectSwitch extends WatchUi.Selectable {
     }
 
     function updateState(value){
-        if(busy == true){
-            return;
-        }
-        busy = true;
         if(value != null){
             Application.getApp().setIoState(setterId, mapTo(value), method(:onIoState));
         }
@@ -276,7 +244,6 @@ class ObjectSwitch extends WatchUi.Selectable {
                 setState(:stateDefault);
             }
         }
-        busy = false;
     }
 
     function mapFrom(value){

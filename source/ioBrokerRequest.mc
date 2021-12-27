@@ -1,5 +1,4 @@
 using Toybox.Communications;
-using Toybox.Timer;
 
 class ioBrokerRequest{
     enum{
@@ -21,9 +20,6 @@ class ioBrokerRequest{
 
     private var mDataCallback;
 
-    private var mTimer;
-    private var mGetterRequests;
-
     public var mErrorCode;
 
     function initialize(getterCallback, definitionCallback, finishCallback){
@@ -31,7 +27,6 @@ class ioBrokerRequest{
         mGetterCallback = getterCallback;
         mFinishCallback = finishCallback;
         mState = Init;
-        mGetterRequests = [];
     }
 
     function setDataCallback(dataCallback){
@@ -40,6 +35,10 @@ class ioBrokerRequest{
 
     function hasConnectionError(){
         return mState == NoDefinition;
+    }
+
+    function hasError(){
+        return mState == Error;
     }
 
     function isFinished(){
@@ -81,27 +80,6 @@ class ioBrokerRequest{
         }
 
         return sList;
-    }
-
-    function waitGetState(parameters, oCallback){
-        mGetterRequests.add({ "callback"=>oCallback, "params"=>parameters });
-        if(mTimer != null){
-            return;
-        }
-        mTimer = new Timer.Timer();
-        // give the system some time to perform the response
-        mTimer.start(method(:checkState), 100, true);
-    }
-
-    function checkState(){
-        if(isFinished()){
-            mTimer.stop();
-            mTimer = null;
-            for(var i = 0; i < mGetterRequests.size(); ++i){
-                mGetterRequests[i]["callback"].invoke(mGetterRequests[i]["params"]["id"], mGetterRequests[i]["params"]["meth"]);
-            }
-            mGetterRequests = [];
-        }
     }
 
     function loadDefinition(){
@@ -185,17 +163,14 @@ class ioBrokerRequest{
             for(var i = 0; i < aResult.size(); ++i){
                 mGetterCallback.invoke(aResult[i]["id"], aResult[i][mAttribute]);
             }
-            if(mFinishCallback instanceof Lang.Method){
-                mFinishCallback.invoke();
-            }
             mState = Finished;
         }
         else{
             mState = Error;
             System.println("IO State - error code: " + code);
-            if(mGetterCallback != null){
-                mGetterCallback.invoke(null, null); // calling with null indicates error
-            }
+        }
+        if(mFinishCallback instanceof Lang.Method){
+            mFinishCallback.invoke();
         }
     }
 }

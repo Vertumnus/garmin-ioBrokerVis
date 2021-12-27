@@ -437,6 +437,12 @@ class SpaceView extends WatchUi.View {
     function onUpdate(dc) {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
+
+        dc.clear();
+        if(Application.getApp().hasError()){
+            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+            dc.drawCircle(dc.getWidth() / 2, dc.getHeight() / 2, mTextSize * 0.75);
+        }
     }
 
     // Called when this View is removed from the screen. Save the

@@ -1,4 +1,5 @@
 using Toybox.Application;
+using Toybox.Communications;
 using Toybox.WatchUi;
 using Toybox.Timer;
 
@@ -68,11 +69,8 @@ class ioBrokerVisApp extends Application.AppBase {
     }
 
     function getIoState(id, oMethod){
-        if(mIoRequest.isFinished()){
-            oMethod.invoke(id, (mIoStates[id] != null)?mIoStates[id]:"");
-        }
-        else{
-            mIoRequest.waitGetState({ "id"=>id, "meth"=>oMethod }, method(:getIoState));
+        if(mIoStates[id] != null){
+            oMethod.invoke(id, mIoStates[id]);
         }
 
         return me;
@@ -84,6 +82,7 @@ class ioBrokerVisApp extends Application.AppBase {
             oRequest.setDataCallback(method(:onDemoData));
         }
         oRequest.set(id, value);
+        mIoStates[id] = value;
 
         return me;
     }
@@ -92,6 +91,7 @@ class ioBrokerVisApp extends Application.AppBase {
         if(!isSpaceReady()){
             return me;
         }
+        Communications.cancelAllRequests();
         var aObjects = getCurrentSpace()["objects"];
         var aIds = [];
         for(var i = 0; i < aObjects.size(); ++i){
@@ -116,7 +116,7 @@ class ioBrokerVisApp extends Application.AppBase {
             mSpaces = spaces;
         }
         // give the system some time to handle view stack (otherwise the app crashes)
-        new Timer.Timer().start(method(:afterDefinitionLoaded), 10, false);
+        new Timer.Timer().start(method(:afterDefinitionLoaded), 100, false);
     }
 
     function afterDefinitionLoaded(){
@@ -127,12 +127,33 @@ class ioBrokerVisApp extends Application.AppBase {
         }
     }
 
+    function updateViewItems(){
+        if(mViewItems.size() == 0){
+            new Timer.Timer().start(method(:updateViewItems), 200, false);
+        }
+        else{
+            for(var i = 0; i < mViewItems.size(); ++i){
+                mViewItems[i].updateState(null);
+            }
+            WatchUi.requestUpdate();
+        }
+    }
+
     function onRequestFinished(){
-        WatchUi.requestUpdate();
+        if(mIoRequest.isFinished()){
+            updateViewItems();
+        }
+        else{
+            WatchUi.requestUpdate();
+        }
     }
 
     function hasConnectionError(){
         return mIoRequest.hasConnectionError();
+    }
+
+    function hasError(){
+        return mIoRequest.hasError();
     }
 
     function isConnectionReady(){
@@ -184,10 +205,6 @@ class ioBrokerVisApp extends Application.AppBase {
 
     function refreshViewItems(){
         requestCurrentIoStates();
-        for(var i = 0; i < mViewItems.size(); ++i){
-            mViewItems[i].updateState(null);
-        }
-
         return me;
     }
 

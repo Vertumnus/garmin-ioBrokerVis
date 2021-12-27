@@ -1,5 +1,4 @@
 using Toybox.WatchUi;
-using Toybox.Communications;
 
 class SpaceDelegate extends WatchUi.BehaviorDelegate {
 
@@ -24,17 +23,15 @@ class SpaceDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onNextPage(){
-        Communications.cancelAllRequests();
-        WatchUi.cancelAllAnimations();
         Application.getApp().nextSpace();
+        WatchUi.cancelAllAnimations();
         WatchUi.switchToView(new SpaceView(), new SpaceDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
 
     function onPreviousPage(){
-        Communications.cancelAllRequests();
-        WatchUi.cancelAllAnimations();
         Application.getApp().previousSpace();
+        WatchUi.cancelAllAnimations();
         WatchUi.switchToView(new SpaceView(), new SpaceDelegate(), WatchUi.SLIDE_DOWN);
         return true;
     }
