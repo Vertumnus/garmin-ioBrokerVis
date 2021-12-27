@@ -52,45 +52,38 @@ You need somewhere an object with a special configuration. Currently you have to
 
 > __Recommendation:__ Create it under `0_userdata.0`, e.g. `0_userdata.0.garmin` as type `device`. Be sure that your used user for the simple-api has the authorizations to read this object.
 
-After the creation you have to modify the object. At the object data tab you can see the object configuration in js format. You must create or modify the attribute `native`:
+After the creation you have to modify the object. At the object data tab you can see the object configuration in json format. You must create or modify the attribute `native`:
 
-```js
+```json
 {
     "common": {
-        "name": ...
-        ...
+        "name": "...",
+
     },
-    ...
     "native": {
-        ...
     }
-    ...
 }
 ```
 
 As already described, the UI is separated into _Spaces_, so you must define first those in an Array:
 
-```js
-...
+```json
     "native": {
         "spaces": [
             {
                 "icon": "star",
-                "color": "#FFAA00", // yellow
-                ...
-            },
-            ...
+                "color": "#FFAA00",
+
+            }
         ]
     }
-...
 ```
 
 Each _Space_ has two attributes for visualization. The `icon` and a `color`. See the available icons in the [list](#icon-list) below. You can specify the color in hexadecimal format with a leading #. The `icon` is mandatory. If you do not specify the `color` the widget takes __yellow__ as default.
 
 As you know a _Space_ exists of _Objects_, so you have to specify them too inside:
 
-```js
-...
+```json
     "native": {
         "spaces": [
             {
@@ -98,14 +91,12 @@ As you know a _Space_ exists of _Objects_, so you have to specify them too insid
                 "objects": [
                     {
                         "type": "<icon>|text|state",
-                        ...
-                    },
-                    ...
+
+                    }
                 ]
             }
         ]
     }
-...
 ```
 
 An _Object_ has always a `type`. The type could be an icon (see [list](#icon-list) below), a simple text or a state. For any type you can specify a `color` like at the _Space_. The type _text_ has __white__ as default color and the others has __blue__.
@@ -113,15 +104,13 @@ An _Object_ has always a `type`. The type could be an icon (see [list](#icon-lis
 The type _text_ needs the additional attribute `get`, where you must specify the state in your ioBroker object list, which has to be read. Additionally you can specify a `unit` as postfix and a `precision` of the decimal places for numbers (rounded).
 
 > Example: Show the temperature -> 21.5°C
-> ```js
->   ...
+> ```json
 >   {
 >       "type": "text",
 >       "get": "adapter.0.channel.device.temperature",
 >       "unit": "°C",
 >       "precision": "1"
 >   }
->   ...
 > ```
 
 The type _icon_ you can use as simple showing indicator, as switch (showing the sate and change it) or as simple command (activate something). The indicator and the switch work only with boolean or similar states. You can control the usage by specifying the attributes `get` and `set` or even not. As switch it needs both attributes, as indicator it needs only `get` and as command it needs only `set`. Depending on the usage you should choose a fitting icon (see [list](#icon-list) below). A switch as well as an indicator should have an icon with the usage _switch_ and a command can have any icon (consider the restrictions described at the [icon list](#icon-list)).  
@@ -129,11 +118,10 @@ If you have a similar state to a boolean state, you must configure a mapping. Th
 The command needs additionally the attribute `value`. This attribute contains the value, which has to be sent to the state in ioBroker.
 
 > Example: Switch for a bulb (where the state has the values `on` and `off`) and Command to start a timer
-> ```js
->   ...
+> ```json
 >   {
 >       "type": "bulb",
->       "color": "#FF9900", // orange
+>       "color": "#FF9900",
 >       "get": "adapter.0.channel.device.state",
 >       "set": "adapter.0.channel.device.state",
 >       "true": "on",
@@ -144,7 +132,6 @@ The command needs additionally the attribute `value`. This attribute contains th
 >       "set": "adapter.0.channel.device.timer",
 >       "value": "start"
 >   }
->   ...
 > ```
 
 The type _state_ is a little bit more complex. You need in any case the attributes `get` and `scopes`. The attribute `get` contains - as you already know - the state in your ioBroker, whose value you want to read. The attribute `scopes` is again an Array with several elements; you can even say the characteristics of the state. So depending on the value of your specified state, one of the _Scopes_ will be shown. Each _Scope_ is more or less like an _Object_. So you must define the attribute `type` here too. This time you have only the choice between a simple text and an icon as indicator (no switch and no command). You can specifiy also a `color` for a _Scope_. Additionally you need at least one of the attributes `value`, `min` or `max`. With `value` you can specify a concrete value of your sate, where the _Scope_ should be active. It overrules the other both attributes, so they are superfluous if you sepcify `value`. With the attributes `min` and `max` you can specify ranges (for numerical values). If one of them is missing, it will be interpreted as endless.
@@ -152,25 +139,24 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 > __Consider:__ The widget checks the _Scopes_ in the specified order; first come, first serve. So if you have an overlap the first fitting _Scope_ wins.
 
 > Example: Show temperature as colored text or icon, if it is too cold or too hot
-> ```js
->   ...
+> ```json
 >   {
 >       "type": "state",
 >       "get": "adapter.0.channel.device.temperature",
 >       "scopes": [
->           { // show snow icon if the temperature is -5 or less
+>           { /* show snow icon if the temperature is -5 or less */
 >               "type": "snow",
 >               "color": "#FFFFFF",
 >               "max": "-5"
 >           },
->           { // show zero in white (must come first due to overlap with next scope)
+>           { /* show zero in white (must come first due to overlap with next scope) */
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "0",
 >               "color": "#FFFFFF",
 >               "value": "0"
 >           },
->           { // show temperature in blue if it is between -5 and 10
+>           { /* show temperature in blue if it is between -5 and 10 */
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -178,7 +164,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "-5",
 >               "max": "10"
 >           },
->           { // show temperature in grey if it is between 10 and 20
+>           { /* show temperature in grey if it is between 10 and 20 */
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -186,7 +172,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "10",
 >               "max": "20"
 >           },
->           { // show temperature in green if it is between 20 and 30
+>           { /* show temperature in green if it is between 20 and 30 */
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -194,7 +180,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "20",
 >               "max": "30"
 >           },
->           { // show temperature in orange if it is between 30 and 40
+>           { /* show temperature in orange if it is between 30 and 40 */
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -202,14 +188,13 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "30",
 >               "max": "40"
 >           },
->           { // show alert icon if temperature is higher than 40
+>           { /* show alert icon if temperature is higher than 40 */
 >               "type": "alert",
 >               "color": "#FF0000",
 >               "min": "40"
 >           }
 >       ]
 >   }
->   ...
 > ```
 
 ### FAQ
