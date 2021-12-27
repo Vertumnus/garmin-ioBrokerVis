@@ -43,8 +43,8 @@ Of course you need an [ioBroker](https://www.iobroker.net/) instance / server. A
 
 ### Details
 
-Your simple-api instance needs in each case the setting for HTTPS. Use appropriate certificates for that. You can find some hints in the following FAQ.
-My recommendation: Activate also the option _Authentication_ and configure a fitting user with password for your use case.
+Your simple-api instance needs in each case the setting for HTTPS. Use appropriate certificates for that. You can find some hints in the [FAQ](#faq).
+> __Recommendation:__ Activate also the option _Authentication_ and configure a fitting user with password for your use case.
 
 #### Object with configuration
 
@@ -52,7 +52,7 @@ You need somewhere an object with a special configuration. Currently you have to
 
 > __Recommendation:__ Create it under `0_userdata.0`, e.g. `0_userdata.0.garmin` as type `device`. Be sure that your used user for the simple-api has the authorizations to read this object.
 
-After creation you have to modify the object. At the object data tab you can see the object configuration in JSON format. You must create or modify the attribute `native`:
+After the creation you have to modify the object. At the object data tab you can see the object configuration in JSON format. You must create or modify the attribute `native`:
 
 ```json
 {
@@ -85,7 +85,7 @@ As already described, the UI is separated into _Spaces_, so you must define firs
 ...
 ```
 
-Each _Space_ has two attributes for visualization. The `icon` and a `color`. See the available icons in the list below. You can specify the color in hexadecimal format with a leading #. The `icon` is mandatory. If you do not specify the `color` the widget takes __yellow__ as default.
+Each _Space_ has two attributes for visualization. The `icon` and a `color`. See the available icons in the [list](#icon-list) below. You can specify the color in hexadecimal format with a leading #. The `icon` is mandatory. If you do not specify the `color` the widget takes __yellow__ as default.
 
 As you know a _Space_ exists of _Objects_, so you have to specify them too inside:
 
@@ -108,16 +108,16 @@ As you know a _Space_ exists of _Objects_, so you have to specify them too insid
 ...
 ```
 
-An _Object_ has always a `type`. The type could be an icon (see list below), a simple text or a state. For any type you can specify a `color` like at the _Space_. The type _text_ has __white__ as default color and the others has __blue__.
+An _Object_ has always a `type`. The type could be an icon (see [list](#icon-list) below), a simple text or a state. For any type you can specify a `color` like at the _Space_. The type _text_ has __white__ as default color and the others has __blue__.
 
-The type _text_ needs the additional attribute `get`, where you must specify the state in your ioBroker object list, which has to be read. Additionally you can specify a `unit` as postfix and a `precision` of the decimal places for numbers.
+The type _text_ needs the additional attribute `get`, where you must specify the state in your ioBroker object list, which has to be read. Additionally you can specify a `unit` as postfix and a `precision` of the decimal places for numbers (rounded).
 
 > Example: Show the temperature -> 21.5°C
 > ```json
 >   ...
 >   {
 >       "type": "text",
->       "get": "adapter.0.device.temperature",
+>       "get": "adapter.0.channel.device.temperature",
 >       "unit": "°C",
 >       "precision": "1"
 >   }
@@ -134,14 +134,14 @@ The command needs additionally the attribute `value`. This attribute contains th
 >   {
 >       "type": "bulb",
 >       "color": "#FF9900", // orange
->       "get": "adapter.0.device.state",
->       "set": "adapter.0.device.state",
+>       "get": "adapter.0.channel.device.state",
+>       "set": "adapter.0.channel.device.state",
 >       "true": "on",
 >       "false": "off"
 >   },
 >   {
 >       "type": "play",
->       "set": "adapter.0.device.timer",
+>       "set": "adapter.0.channel.device.timer",
 >       "value": "start"
 >   }
 >   ...
@@ -156,7 +156,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >   ...
 >   {
 >       "type": "state",
->       "get": "adapter.0.device.temperature",
+>       "get": "adapter.0.channel.device.temperature",
 >       "scopes": [
 >           { // show snow icon if the temperature is -5 or less
 >               "type": "snow",
@@ -236,7 +236,7 @@ There are four settings you can configure in the Garmin Connect Mobile App. The 
 
     > Put in the URL (incl. port) to your simple-api instance of your ioBroker server, e.g. `https://ioBroker.mydomain.xyz:8088`
 
-    > As default the setting have the URL `http://www.example.com`. This URL triggers a demo setting of _Spaces_ so you can get a look & feel.
+    > As default the setting has the URL `http://www.example.com`. This URL triggers a demo setting of _Spaces_ so you can get a look & feel.
 
 2. Definition Object*
 
@@ -332,7 +332,7 @@ The icons are separated in the usages _single_ and _switch_. Consider, if you ch
 
 ## Open Tasks
 
-- Adapter in ioBroker to create the object with the configuration
+- Adapter in ioBroker to create the object with the configuration with a user friendly UI
 
 ## License
 
