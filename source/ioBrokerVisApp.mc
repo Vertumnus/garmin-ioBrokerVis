@@ -5,11 +5,17 @@ using Toybox.Timer;
 
 class ioBrokerVisApp extends Application.AppBase {
 
+    enum{
+        Main,
+        Space
+    }
+
     private var mSpaces;
     private var mCurrentSpace;
     private var mIoStates;
     public var mIoRequest;
     private var mViewItems;
+    private var mView;
 
     private var mDemoStates;
 
@@ -22,10 +28,23 @@ class ioBrokerVisApp extends Application.AppBase {
         mSpaces = [];
         mCurrentSpace = 0;
         mIoStates = {};
+        mViewItems = [];
         mIoRequest = new ioBrokerRequest(method(:onReceiveState), method(:onDefinitionLoaded), method(:onRequestFinished));
 
         GioBFont = WatchUi.loadResource(Rez.Fonts.giob);
         aPositions = WatchUi.loadResource(Rez.JsonData.DevicePositions);
+    }
+
+    function atMain(){
+        mView = Main;
+    }
+
+    function atSpace(){
+        mView = Space;
+    }
+
+    function showsSpace(){
+        return mView == Space;
     }
 
     function isDemo(){
@@ -169,7 +188,7 @@ class ioBrokerVisApp extends Application.AppBase {
             return mSpaces[mCurrentSpace];
         }
         else{
-            return [];
+            return null;
         }
     }
 
@@ -209,6 +228,9 @@ class ioBrokerVisApp extends Application.AppBase {
     }
 
     function onSettingsChanged() {
+        if(showsSpace()){
+            WatchUi.popView(WatchUi.SLIDE_BLINK);
+        }
         connect();
     }
 

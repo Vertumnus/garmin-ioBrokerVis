@@ -109,31 +109,36 @@ class ObjectState extends ObjectText {
                     break;
                 }
             }
-            else if(allScopes[i]["min"] == null){
-                if(value.toNumber() <= allScopes[i]["max"].toNumber()){
-                    scope = allScopes[i];
-                    break;
-                }
-            }
-            else if(allScopes[i]["max"] == null){
-                if(value.toNumber() >= allScopes[i]["min"].toNumber()){
-                    scope = allScopes[i];
-                    break;
-                }
-            }
             else{
-                if(value.toNumber() >= allScopes[i]["min"].toNumber() && value.toNumber() <= allScopes[i]["max"].toNumber()){
-                    scope = allScopes[i];
-                    break;
+                var val = value.toNumber();
+                if(val == null){
+                    continue;
                 }
-            }
+                if(allScopes[i]["min"] == null){
+                    if(val <= allScopes[i]["max"].toNumber()){
+                        scope = allScopes[i];
+                        break;
+                    }
+                }
+                else if(allScopes[i]["max"] == null){
+                    if(val >= allScopes[i]["min"].toNumber()){
+                        scope = allScopes[i];
+                        break;
+                    }
+                }
+                else{
+                    if(val >= allScopes[i]["min"].toNumber() && val <= allScopes[i]["max"].toNumber()){
+                        scope = allScopes[i];
+                        break;
+                    }
+                }
+            } 
         }
-        if(scope == null){
-            return null;
-        }
-        if(scope["icon"] != null){
+
+        if(scope != null && scope["icon"] != null){
             return scope["icon"];
         }
+
         if(scopeText == null){
             scopeText = new BaseText({
                 :justification=>Graphics.TEXT_JUSTIFY_CENTER,
@@ -141,8 +146,10 @@ class ObjectState extends ObjectText {
                 :text=>"?"
             });
         }
+
         scopeText.setText(buildText(value));
-        scopeText.setColor(scope["color"]);
+        scopeText.setColor(scope == null ? Graphics.COLOR_WHITE : scope["color"]);
+
         return scopeText;
     }
 

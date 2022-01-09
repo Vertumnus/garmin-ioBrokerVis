@@ -403,6 +403,10 @@ class SpaceView extends WatchUi.View {
     // Load your resources here
     function onLayout(dc) {
         var dSpace = Application.getApp().getCurrentSpace();
+        if(dSpace == null){
+            return;
+        }
+        
         var aObjects = dSpace["objects"];
         var aViewItems = [];
         for(var i = 0; i < aObjects.size(); ++i){
@@ -431,6 +435,7 @@ class SpaceView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
+        Application.getApp().atSpace();
     }
 
     // Update the view
