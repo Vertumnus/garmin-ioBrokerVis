@@ -16,40 +16,40 @@ class MainView extends WatchUi.View {
         var text = "";
         switch(err){
             case Communications.SECURE_CONNECTION_REQUIRED:
-                text = "HTTPS required";
+                text = WatchUi.loadResource($.Rez.Strings.errorHTTPS);
                 break;
             case Communications.NETWORK_RESPONSE_OUT_OF_MEMORY:
             case Communications.NETWORK_RESPONSE_TOO_LARGE:
             case Communications.INVALID_HTTP_HEADER_FIELDS_IN_NETWORK_RESPONSE:
             case Communications.INVALID_HTTP_BODY_IN_NETWORK_RESPONSE:
-                text = "Response issue (" + err + ")";
+                text = WatchUi.loadResource($.Rez.Strings.errorRes) + ": " + err;
                 break;
             case Communications.NETWORK_REQUEST_TIMED_OUT:
-                text = "Unavailable";
+                text = WatchUi.loadResource($.Rez.Strings.errorUnavailable);
                 break;
             case Communications.INVALID_HTTP_METHOD_IN_REQUEST:
             case Communications.INVALID_HTTP_BODY_IN_REQUEST:
             case Communications.INVALID_HTTP_HEADER_FIELDS_IN_REQUEST:
-                text = "Request issue (" + err + ")";
+                text = WatchUi.loadResource($.Rez.Strings.errorReq) + ": " + err;
                 break;
             case Communications.BLE_CONNECTION_UNAVAILABLE:
-                text = "No Connection";
+                text = WatchUi.loadResource($.Rez.Strings.errorConnection);
                 break;
             case 400:
-                text = "Bad Request";
+                text = WatchUi.loadResource($.Rez.Strings.errorBadReq);
                 break;
             case 401:
-                text = "Unauthorized";
+                text = WatchUi.loadResource($.Rez.Strings.errorUnauthorized);
                 break;
             case 403:
-                text = "Forbidden";
+                text = WatchUi.loadResource($.Rez.Strings.errorForbidden);
                 break;
             case 404:
-                text = "Not Found";
+                text = WatchUi.loadResource($.Rez.Strings.errorNotFound);
                 break;
             default:
                 if(err < 200 || err >= 300){
-                    text = "Error (" + err + ")";
+                    text = WatchUi.loadResource($.Rez.Strings.errorGeneral) + ": " + err;
                 }
                 break;
         }

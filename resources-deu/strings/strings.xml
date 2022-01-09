@@ -4,4 +4,14 @@
     <string id="defobj">Objekt mit der Konfiguration</string>
     <string id="user">Benutzername</string>
     <string id="password">Passwort</string>
+    <string id="errorHTTPS">HTTPS nötig</string>
+    <string id="errorRes">Problem bei Antwort</string>
+    <string id="errorUnavailable">Nicht erreichbar</string>
+    <string id="errorReq">Problem bei Anforderung</string>
+    <string id="errorConnection">Keine Verbindung</string>
+    <string id="errorBadReq">Falsche Anforderung</string>
+    <string id="errorUnauthorized">Nicht berechtigt</string>
+    <string id="errorForbidden">Verboten</string>
+    <string id="errorNotFound">Nicht vorhanden</string>
+    <string id="errorGeneral">Fehler</string>
 </strings>

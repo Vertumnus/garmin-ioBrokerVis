@@ -4,4 +4,14 @@
     <string id="defobj">Definition Object</string>
     <string id="user">Username</string>
     <string id="password">Password</string>
+    <string id="errorHTTPS">HTTPS required</string>
+    <string id="errorRes">Response issue</string>
+    <string id="errorUnavailable">Unavailable</string>
+    <string id="errorReq">Request issue</string>
+    <string id="errorConnection">No Connection</string>
+    <string id="errorBadReq">Bad Request</string>
+    <string id="errorUnauthorized">Unauthorized</string>
+    <string id="errorForbidden">Forbidden</string>
+    <string id="errorNotFound">Not Found</string>
+    <string id="errorGeneral">Error</string>
 </strings>
