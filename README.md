@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="doc/icons.css" />
-
 # Garmin ioBroker Visualization
 
 ## Content
@@ -237,83 +235,7 @@ There are four settings you can configure in the Garmin Connect Mobile App. The 
 
 ## Icon List
 
-The icons are separated in the usages _single_ and _switch_. Consider, if you choose a icon with usage _switch_ in a case for icon with usage _single_, the widget takes the icon showing the on or active state.
-
-| __Name__ | __Usage__ | __Icon(s)__ |
-| --- | --- | --- |
-| alert | single | <i class="icon-alert" /> |
-| back | single | <i class="icon-play-back" /> |
-| barbell | single | <i class="icon-barbell" /> |
-| bathroom | single | <i class="icon-bathtub" /> |
-| battery-charge | single | <i class="icon-battery-charging" /> |
-| battery-full | single | <i class="icon-battery-full" /> |
-| battery-low | single | <i class="icon-battery-alert" /> |
-| bedroom | single | <i class="icon-bed" /> |
-| bluetooth | switch | <i class="icon-bluetooth" /> <i class="icon-bluetooth-off" /> |
-| books | single | <i class="icon-library" /> |
-| build | single | <i class="icon-build" /> |
-| bulb | switch | <i class="icon-lightbulb" /> <i class="icon-lightbulb-off" /> |
-| camera | switch | <i class="icon-videocam" /> <i class="icon-videocam-off" /> |
-| car | single | <i class="icon-car" /> |
-| caret-back | single | <i class="icon-caret-back" /> |
-| caret-down | single | <i class="icon-caret-down" /> |
-| caret-forward | single | <i class="icon-caret-forward" /> |
-| caret-up | single | <i class="icon-caret-up" /> |
-| check | switch | <i class="icon-checkbox" /> <i class="icon-checkbox-off" /> |
-| childroom | single | <i class="icon-child" /> |
-| close | single | <i class="icon-close" /> |
-| cloudy | single | <i class="icon-cloudy" /> |
-| cloudy-night | single | <i class="icon-cloudy-night" /> |
-| paired | switch | <i class="icon-leak-on" /> <i class="icon-leak-off" /> |
-| deck | single | <i class="icon-deck" /> |
-| dining | single | <i class="icon-restaurant" /> |
-| eye | switch | <i class="icon-eye" /> <i class="icon-eye-off" /> |
-| favorite | single | <i class="icon-favorite" /> |
-| feed | single | <i class="icon-feed" /> |
-| flash | switch | <i class="icon-flash" /> <i class="icon-flash-off" /> |
-| forward | single | <i class="icon-play-forward" /> |
-| game | single | <i class="icon-game-controller" /> |
-| headset | switch | <i class="icon-headset" /> <i class="icon-headset-off" /> |
-| home | single | <i class="icon-home" /> |
-| info | single | <i class="icon-information" /> |
-| kitchen | single | <i class="icon-kitchen" /> |
-| lamp | single | <i class="icon-lamp" /> |
-| link | switch | <i class="icon-link" /> <i class="icon-link-off" /> |
-| living | single | <i class="icon-weekend" /> |
-| lock | switch | <i class="icon-lock" /> <i class="icon-unlocked" /> |
-| mic | switch | <i class="icon-mic" /> <i class="icon-mic-off" /> |
-| moon | single | <i class="icon-moon" /> |
-| music | single | <i class="icon-music" /> |
-| notify | switch | <i class="icon-notifications" /> <i class="icon-notifications-off" /> |
-| ok | single | <i class="icon-checkmark" /> |
-| partly-sunny | single | <i class="icon-partly-sunny" /> |
-| pause | single | <i class="icon-pause" /> |
-| play | single | <i class="icon-play" /> |
-| power | switch | <i class="icon-power" /> <i class="icon-power-off" /> |
-| rainy | single | <i class="icon-rainy" /> |
-| seal | switch | <i class="icon-seal" /> <i class="icon-seal-off" /> |
-| skip-back | single | <i class="icon-play-skip-back" /> |
-| skip-forward | single | <i class="icon-play-skip-forward" /> |
-| snow | single | <i class="icon-snow" /> |
-| sparkles | single | <i class="icon-sparkles" /> |
-| speaker | single | <i class="icon-speaker" /> |
-| stairs | single | <i class="icon-stairs" /> |
-| star | single | <i class="icon-star" /> |
-| stop | single | <i class="icon-stop" /> |
-| sunny | single | <i class="icon-sunny" /> |
-| target | switch | <i class="icon-target" /> <i class="icon-target-off" /> |
-| thermo | single | <i class="icon-thermostat" /> |
-| thunder | single | <i class="icon-thunderstorm" /> |
-| toggle | switch | <i class="icon-radio-button-on" /> <i class="icon-radio-button-off" /> |
-| torch | single | <i class="icon-torch" /> |
-| tv | single | <i class="icon-tv" /> |
-| vol- | single | <i class="icon-volume-down" /> |
-| vol+ | single | <i class="icon-volume-up" /> |
-| volume | switch | <i class="icon-volume-mute" /> <i class="icon-volume-off" /> |
-| wand | single | <i class="icon-wand" /> |
-| wc | single | <i class="icon-wc" /> |
-| work | single | <i class="icon-work" /> |
-| yard | single | <i class="icon-flower" /> |
+Take a look in the separate [document](./doc/iconlist.html) with the icon list.
 
 ## Open Tasks
 
