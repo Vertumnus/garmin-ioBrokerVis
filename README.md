@@ -139,7 +139,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 > __Consider:__ The widget checks the _Scopes_ in the specified order; first come, first serve. So if you have an overlap the first fitting _Scope_ wins.
 
 > Example: Show temperature as colored text or icon, if it is too cold or too hot
-> ```jsonc
+> ```json5
 >   {
 >       "type": "state",
 >       "get": "adapter.0.channel.device.temperature",
