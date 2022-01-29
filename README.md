@@ -117,19 +117,21 @@ The command needs additionally the attribute `value`. This attribute contains th
 
 > Example: Switch for a bulb (where the state has the values `on` and `off`) and Command to start a timer
 > ```json
->   {
->       "type": "bulb",
->       "color": "#FF9900",
->       "get": "adapter.0.channel.device.state",
->       "set": "adapter.0.channel.device.state",
->       "true": "on",
->       "false": "off"
->   },
->   {
->       "type": "play",
->       "set": "adapter.0.channel.device.timer",
->       "value": "start"
->   }
+>   [
+>       {
+>           "type": "bulb",
+>           "color": "#FF9900",
+>           "get": "adapter.0.channel.device.state",
+>           "set": "adapter.0.channel.device.state",
+>           "true": "on",
+>           "false": "off"
+>       },
+>       {
+>           "type": "play",
+>           "set": "adapter.0.channel.device.timer",
+>           "value": "start"
+>       }
+>   ]
 > ```
 
 The type _state_ is a little bit more complex. You need in any case the attributes `get` and `scopes`. The attribute `get` contains - as you already know - the state in your ioBroker, whose value you want to read. The attribute `scopes` is again an Array with several elements; you can even say the characteristics of the state. So depending on the value of your specified state, one of the _Scopes_ will be shown. Each _Scope_ is more or less like an _Object_. So you must define the attribute `type` here too. This time you have only the choice between a simple text and an icon as indicator (no switch and no command). You can specifiy also a `color` for a _Scope_. Additionally you need at least one of the attributes `value`, `min` or `max`. With `value` you can specify a concrete value of your sate, where the _Scope_ should be active. It overrules the other both attributes, so they are superfluous if you sepcify `value`. With the attributes `min` and `max` you can specify ranges (for numerical values). If one of them is missing, it will be interpreted as endless.
@@ -137,24 +139,24 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 > __Consider:__ The widget checks the _Scopes_ in the specified order; first come, first serve. So if you have an overlap the first fitting _Scope_ wins.
 
 > Example: Show temperature as colored text or icon, if it is too cold or too hot
-> ```json
+> ```jsonc
 >   {
 >       "type": "state",
 >       "get": "adapter.0.channel.device.temperature",
 >       "scopes": [
->           { /* show snow icon if the temperature is -5 or less */
+>           { // show snow icon if the temperature is -5 or less
 >               "type": "snow",
 >               "color": "#FFFFFF",
 >               "max": "-5"
 >           },
->           { /* show zero in white (must come first due to overlap with next scope) */
+>           { // show zero in white (must come first due to overlap with next scope)
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "0",
 >               "color": "#FFFFFF",
 >               "value": "0"
 >           },
->           { /* show temperature in blue if it is between -5 and 10 */
+>           { // show temperature in blue if it is between -5 and 10
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -162,7 +164,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "-5",
 >               "max": "10"
 >           },
->           { /* show temperature in grey if it is between 10 and 20 */
+>           { // show temperature in grey if it is between 10 and 20
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -170,7 +172,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "10",
 >               "max": "20"
 >           },
->           { /* show temperature in green if it is between 20 and 30 */
+>           { // show temperature in green if it is between 20 and 30
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -178,7 +180,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "20",
 >               "max": "30"
 >           },
->           { /* show temperature in orange if it is between 30 and 40 */
+>           { // show temperature in orange if it is between 30 and 40
 >               "type": "text",
 >               "unit": "°C",
 >               "precision": "1",
@@ -186,7 +188,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >               "min": "30",
 >               "max": "40"
 >           },
->           { /* show alert icon if temperature is higher than 40 */
+>           { // show alert icon if temperature is higher than 40
 >               "type": "alert",
 >               "color": "#FF0000",
 >               "min": "40"
