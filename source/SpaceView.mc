@@ -232,9 +232,9 @@ class SpaceView extends WatchUi.View {
                 return 0xF3AD.toChar().toString();
             case "tv":
                 return 0xF3AC.toChar().toString();
-            case "vol-":
+            case "vol-down":
                 return "<";
-            case "vol+":
+            case "vol-up":
                 return ">";
             case "volume":
                 if(bOn == false){
