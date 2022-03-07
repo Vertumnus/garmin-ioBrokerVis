@@ -61,7 +61,7 @@
                         "set": "media"
                     },
                     {
-                        "type": "vol+",
+                        "type": "vol-up",
                         "set": "vol",
                         "value": "+"
                     },
@@ -70,7 +70,7 @@
                         "get": "volume"
                     },
                     {
-                        "type": "vol-",
+                        "type": "vol-down",
                         "set": "vol",
                         "value": "-"
                     }
@@ -84,7 +84,7 @@
                         "get": "volume"
                     },
                     {
-                        "type": "vol+",
+                        "type": "vol-up",
                         "set": "vol",
                         "value": "+"
                     },
@@ -100,7 +100,7 @@
                         "set": "mic"
                     },
                     {
-                        "type": "vol-",
+                        "type": "vol-down",
                         "set": "vol",
                         "value": "-"
                     }
@@ -213,7 +213,7 @@
                         "set": "mic"
                     },
                     {
-                        "type": "vol-",
+                        "type": "vol-down",
                         "color": "#FF0000",
                         "set": "vol",
                         "value": "-"
@@ -223,7 +223,7 @@
                         "get": "volume"
                     },
                     {
-                        "type": "vol+",
+                        "type": "vol-up",
                         "color": "#00FF00",
                         "set": "vol",
                         "value": "+"

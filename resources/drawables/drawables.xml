@@ -1,3 +1,3 @@
 <drawables>
-    <bitmap id="LauncherIcon" filename="ioBrokerIcon.png" />
+    <bitmap id="LauncherIcon" filename="ioBrokerIcon.gif" dithering="none" />
 </drawables>

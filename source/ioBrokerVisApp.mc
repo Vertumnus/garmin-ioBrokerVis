@@ -29,10 +29,6 @@ class ioBrokerVisApp extends Application.AppBase {
         mCurrentSpace = 0;
         mIoStates = {};
         mViewItems = [];
-        mIoRequest = new ioBrokerRequest(method(:onReceiveState), method(:onDefinitionLoaded), method(:onRequestFinished));
-
-        GioBFont = WatchUi.loadResource(Rez.Fonts.giob);
-        aPositions = WatchUi.loadResource(Rez.JsonData.DevicePositions);
     }
 
     function atMain(){
@@ -244,7 +240,15 @@ class ioBrokerVisApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
+        mIoRequest = new ioBrokerRequest(method(:onReceiveState), method(:onDefinitionLoaded), method(:onRequestFinished));
+        GioBFont = WatchUi.loadResource(Rez.Fonts.giob);
+        aPositions = WatchUi.loadResource(Rez.JsonData.DevicePositions);
         return [ new MainView(), new MainDelegate() ];
+    }
+
+    (:glance)
+    function getGlanceView() {
+        return [ new GlanceView() ];
     }
 
 }
