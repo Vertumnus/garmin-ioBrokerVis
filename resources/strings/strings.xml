@@ -14,4 +14,6 @@
     <string id="errorForbidden">Forbidden</string>
     <string id="errorNotFound">Not Found</string>
     <string id="errorGeneral">Error</string>
+    <string id="greeting">Greeting</string>
+    <string id="greetingInfo">Greeting in the Glance list</string>
 </strings>

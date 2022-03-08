@@ -1,1 +1,11 @@
 project.manifest = manifest.xml
+
+# resources for devices with glance
+d2airx10.resourcePath = $(d2airx10.resourcePath);resources-glance
+epix2.resourcePath = $(epix2.resourcePath);resources-glance
+fenix7.resourcePath = $(fenix7.resourcePath);resources-glance
+fenix7s.resourcePath = $(fenix7s.resourcePath);resources-glance
+fenix7x.resourcePath = $(fenix7x.resourcePath);resources-glance
+venu2.resourcePath = $(venu2.resourcePath);resources-glance
+venu2plus.resourcePath = $(venu2plus.resourcePath);resources-glance
+venu2s.resourcePath = $(venu2s.resourcePath);resources-glance

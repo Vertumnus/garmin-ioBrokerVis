@@ -2,7 +2,4 @@
     <layout id="MainLayout">
         <bitmap id="ioBrokerImage" x="center" y="center" filename="../drawables/ioBroker.gif" dithering="none" />
     </layout>
-    <layout id="GlanceLayout" scope="glance">
-        <label text="ioBrokerVis" x="5%" y="center" font="Gfx.FONT_LARGE" color="Gfx.COLOR_DK_BLUE" />
-    </layout>
 </layouts>

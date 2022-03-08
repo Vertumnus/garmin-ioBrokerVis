@@ -7,6 +7,7 @@ class ioBrokerVisApp extends Application.AppBase {
 
     enum{
         Main,
+        Glance,
         Space
     }
 
@@ -35,12 +36,20 @@ class ioBrokerVisApp extends Application.AppBase {
         mView = Main;
     }
 
+    function atGlance(){
+        mView = Glance;
+    }
+
     function atSpace(){
         mView = Space;
     }
 
     function showsSpace(){
         return mView == Space;
+    }
+
+    function showsGlance(){
+        return mView == Glance;
     }
 
     function isDemo(){
@@ -224,6 +233,9 @@ class ioBrokerVisApp extends Application.AppBase {
     }
 
     function onSettingsChanged() {
+        if(showsGlance()){
+            return;
+        }
         if(showsSpace()){
             WatchUi.popView(WatchUi.SLIDE_BLINK);
         }
