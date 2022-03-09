@@ -8,9 +8,10 @@
 * [Preconditions](#preconditions)
     - [Details](#details)
         - [Object with configuration](#object-with-configuration)
-    - [FAQ](#faq)
+    - [Connection details](#connection-details)
 * [Settings of the Widget](#settings-of-the-widget)
 * [Icon List](#icon-list)
+* [Troubleshooting](#troubleshooting)
 * [Open Tasks](#open-tasks)
 * [License](#license)
 
@@ -41,7 +42,7 @@ Of course you need an [ioBroker](https://www.iobroker.net/) instance / server. A
 
 ### Details
 
-Your simple-api instance needs in each case the setting for HTTPS. Use appropriate certificates for that. You can find some hints in the [FAQ](#faq).
+Your simple-api instance needs in each case the setting for HTTPS. Use appropriate certificates for that. You can find some hints in the [Connection details](#connection-details).
 > __Recommendation:__ Activate also the option _Authentication_ and configure a fitting user with password for your use case.
 
 #### Object with configuration
@@ -197,25 +198,25 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 >   }
 > ```
 
-### FAQ
+### Connection details
 
-> Why do you need a secured signed connection?
+__Why do you need a secured signed connection?__
 
 Due to some restrictions on the garmin device, you must use https. Otherwise the device refueses the connection.
 This is a good thing in general to secure the communication between the garmin device, the garmin Connect Mobile App and your ioBroker server.
 Especially when using an authorization concept. But, the connection or in better words the security certificate must be signed from an official organization. You cannot import self signed certificates on the garmin device.
 
-> How can you manage this if your ioBroker is in the local network?
+__How can you manage this if your ioBroker is in the local network?__
 
 If your IP address from outside is changing periodically (most cases), you need a [dynamic DNS](https://en.wikipedia.org/wiki/Dynamic_DNS) to solve this problem. So you have a static URL redirecting to your network at home. In the standard case your internet router is addressed this way. So you have to manage there a [port forwarding](https://en.wikipedia.org/wiki/Port_forwarding). In the easiest way you simply forward the same port as your simple-api adapter is listening to and of course you must address there your ioBroker server.
 
-> How does it work with the signed certificate?
+__How does it work with the signed certificate?__
 
 As already explained you need an official signed certificate. You can use some paid offers to get a certificate or you can use [Let's Encrypt](https://letsencrypt.org). Also ioBroker supports Let's Encrypt. At the generation of the certificates you must consider to use the correct URL, e.g. the URL from your dynamic DNS provider, and that the PC where you use Let's Encrypt from is reachable by this URL (usually on web port: 80). Maybe you need again port forwarding for this. Finally you have the needed certificates you must provide them to your simple-api instance. You need the private key certificate, the public key certificate and maybe also the full chain certificate. Consider also, that the certificates must be updated periodically. Using the guide on the Let's Encrypt web page and using the ioBroker server, where the certificates will be generated, the update process should be no problem.
 
 ## Settings of the Widget
 
-There are four settings you can configure in the Garmin Connect Mobile App. The fields with * are mandatory:
+There are four or five settings you can configure in the Garmin Connect Mobile App. The fields with * are mandatory:
 
 1. URL*
 
@@ -235,9 +236,29 @@ There are four settings you can configure in the Garmin Connect Mobile App. The 
 
     > Provide the password for the user
 
+5. Greeting
+
+    > This setting is available only on devices with a Glance List. Specify here a greeting (or description) for the item of this Widget in the list.
+
+    > As default the setting has the phrase `ioBrokerVis`
+
 ## Icon List
 
 Take a look in the separate [document](./doc/iconlist.html) with the icon list.
+
+## Troubleshooting
+
+### Why is there no Icon?
+
+Please check your configuration, if you have specified a valid icon as `type`.
+
+### Why shows the _Object_ a `?` or a wrong state?
+
+Check the associated `get` attribute, if you have specified a valid ioBroker state id. Take a look at the object tree in your ioBroker instance. Check also, if the chosen user has the authorization to read the state.
+
+### Why does the switch not change or doesn't work the trigger on tabbing?
+
+Check if the chosen user has the authorization to write to the state.
 
 ## Open Tasks
 
