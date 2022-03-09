@@ -252,7 +252,7 @@ class SpaceView extends WatchUi.View {
             case "yard":
                 return 0xF3B0.toChar().toString();
             default:
-                throw new Lang.InvalidValueException("Unknown object type: " + sType);
+                return "";
         }
     }
 
