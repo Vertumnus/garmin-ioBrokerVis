@@ -1,4 +1,5 @@
 using Toybox.WatchUi;
+using Toybox.Application.Properties;
 
 (:glance)
 class GlanceView extends WatchUi.GlanceView {

@@ -16,4 +16,5 @@
     <string id="errorGeneral">Error</string>
     <string id="greeting">Greeting</string>
     <string id="greetingInfo">Greeting in the Glance list</string>
+    <string id="options">Options</string>
 </strings>

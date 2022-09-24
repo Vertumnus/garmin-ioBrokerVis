@@ -3,9 +3,11 @@
         "spaces": [
             {
                 "icon": "favorite",
+                "name": "Favorite",
                 "objects": [
                     {
                         "type": "bulb",
+                        "name": "Light",
                         "get": "bulb",
                         "set": "bulb"
                     }
@@ -17,8 +19,11 @@
                 "objects": [
                     {
                         "type": "power",
+                        "name": "Socket",
                         "get": "power",
-                        "set": "power"
+                        "set": "power",
+                        "true": "on",
+                        "false": "off"
                     },
                     {
                         "type": "check",
@@ -31,22 +36,28 @@
             {
                 "icon": "car",
                 "color": "0x0000FF",
+                "name": "Garage",
                 "objects": [
                     {
                         "type": "lock",
                         "color": "#555555",
+                        "name": "Door",
                         "get": "lock",
                         "set": "lock"
                     },
                     {
                         "type": "power",
                         "color": "0xAA0000",
+                        "name": "Socket",
                         "get": "power",
-                        "set": "power"
+                        "set": "power",
+                        "true": "on",
+                        "false": "off"
                     },
                     {
                         "type": "flash",
                         "color": "0xFFAA00",
+                        "name": "High Voltage",
                         "get": "flash",
                         "set": "flash"
                     }
@@ -54,23 +65,28 @@
             },
             {
                 "icon": "tv",
+                "name": "TV",
                 "objects": [
                     {
                         "type": "toggle",
+                        "name": "Power",
                         "get": "media",
                         "set": "media"
                     },
                     {
                         "type": "vol-up",
+                        "name": "Volume Up",
                         "set": "vol",
                         "value": "+"
                     },
                     {
                         "type": "text",
+                        "name": "Volume",
                         "get": "volume"
                     },
                     {
                         "type": "vol-down",
+                        "name": "Volume Down",
                         "set": "vol",
                         "value": "-"
                     }
@@ -78,29 +94,35 @@
             },
             {
                 "icon": "speaker",
+                "name": "Speaker",
                 "objects": [
                     {
                         "type": "text",
+                        "name": "Volume",
                         "get": "volume"
                     },
                     {
                         "type": "vol-up",
+                        "name": "Volume Up",
                         "set": "vol",
                         "value": "+"
                     },
                     {
                         "type": "toggle",
+                        "name": "Power",
                         "get": "media",
                         "set": "media"
                     },
                     {
                         "type": "mic",
                         "color": "#AA00FF",
+                        "name": "Mic",
                         "get": "mic",
                         "set": "mic"
                     },
                     {
                         "type": "vol-down",
+                        "name": "Volume Down",
                         "set": "vol",
                         "value": "-"
                     }
@@ -108,34 +130,43 @@
             },
             {
                 "icon": "bedroom",
+                "name": "Bedroom",
                 "objects": [
                     {
                         "type": "check",
+                        "name": "Fresh Air",
                         "get": "check",
                         "set": "check"
                     },
                     {
                         "type": "lock",
+                        "name": "Door",
                         "get": "lock",
                         "set": "lock"
                     },
                     {
                         "type": "power",
+                        "name": "Socket left",
                         "get": "power",
-                        "set": "power"
+                        "set": "power",
+                        "true": "on",
+                        "false": "off"
                     },
                     {
                         "type": "flash",
+                        "name": "Socket right",
                         "get": "flash",
                         "set": "flash"
                     },
                     {
                         "type": "bulb",
+                        "name": "Lights",
                         "get": "bulb",
                         "set": "bulb"
                     },
                     {
                         "type": "text",
+                        "name": "Temperature",
                         "get": "temp",
                         "unit": "°C"
                     }
@@ -143,37 +174,45 @@
             },
             {
                 "icon": "yard",
+                "name": "Garden",
                 "objects": [
                     {
                         "type": "torch",
+                        "name": "Door Lights",
                         "set": "torch"
                     },
                     {
                         "type": "bulb",
+                        "name": "Light front",
                         "get": "bulb",
                         "set": "bulb"
                     },
                     {
                         "type": "bulb",
+                        "name": "Light back",
                         "get": "bulb",
                         "set": "bulb"
                     },
                     {
                         "type": "lamp",
+                        "name": "Main Lights",
                         "set": "lamp"
                     },
                     {
                         "type": "bulb",
+                        "name": "Light Flowers",
                         "get": "bulb",
                         "set": "bulb"
                     },
                     {
                         "type": "bulb",
+                        "name": "Light Trees",
                         "get": "bulb",
                         "set": "bulb"
                     },
                     {
                         "type": "bulb",
+                        "name": "Light Path",
                         "get": "bulb",
                         "set": "bulb"
                     }
@@ -182,49 +221,60 @@
             {
                 "icon": "living",
                 "color": "0x00AA00",
+                "name": "Living Room",
                 "objects": [
                     {
                         "type": "power",
                         "color": "#FFAA00",
+                        "name": "Socket",
                         "get": "power",
-                        "set": "power"
+                        "set": "power",
+                        "true": "on",
+                        "false": "off"
                     },
                     {
                         "type": "check",
+                        "name": "Fresh Air",
                         "get": "check",
                         "set": "check"
                     },
                     {
                         "type": "toggle",
                         "color": "#FF5500",
+                        "name": "Speaker",
                         "get": "media",
                         "set": "media"
                     },
                     {
                         "type": "lock",
                         "color": "0x555555",
+                        "name": "Door",
                         "get": "lock",
                         "set": "lock"
                     },
                     {
                         "type": "mic",
                         "color": "0xAA00FF",
+                        "name": "Mic",
                         "get": "mic",
                         "set": "mic"
                     },
                     {
                         "type": "vol-down",
                         "color": "#FF0000",
+                        "name": "Volume Down",
                         "set": "vol",
                         "value": "-"
                     },
                     {
                         "type": "text",
+                        "name": "Volume",
                         "get": "volume"
                     },
                     {
                         "type": "vol-up",
                         "color": "#00FF00",
+                        "name": "Volume Up",
                         "set": "vol",
                         "value": "+"
                     }

@@ -5,7 +5,9 @@ class BaseText extends WatchUi.Text {
     function initialize(settings){
         WatchUi.Text.initialize(settings);
 
-        setJustification(Graphics.TEXT_JUSTIFY_CENTER);
+        if(settings.get(:justification) == null){
+            setJustification(Graphics.TEXT_JUSTIFY_CENTER);
+        }
     }
 
     function getFont(){
@@ -15,6 +17,7 @@ class BaseText extends WatchUi.Text {
 
 class ObjectText extends BaseText {
 
+    protected var mGetIoState;
     protected var getterId;
     protected var unitText;
     protected var decimalPrecision;
@@ -22,6 +25,7 @@ class ObjectText extends BaseText {
     function initialize(settings){
         BaseText.initialize(settings);
 
+        mGetIoState = settings.get(:getIoState);
         getterId = settings.get(:getter);
         unitText = settings.get(:unit);
         decimalPrecision = settings.get(:precision);
@@ -57,7 +61,7 @@ class ObjectText extends BaseText {
     }
 
     function updateState(value){
-        Application.getApp().getIoState(getterId, method(:onIoState));
+        mGetIoState.invoke(getterId, method(:onIoState));
     }
 
     function onIoState(id, value){
@@ -97,7 +101,7 @@ class ObjectState extends ObjectText {
     }
 
     function updateState(value){
-        Application.getApp().getIoState(getterId, method(:onIoState));
+        mGetIoState.invoke(getterId, method(:onIoState));
     }
 
     function findScope(value){
@@ -176,12 +180,14 @@ class ObjectState extends ObjectText {
 
 class ObjectButton extends WatchUi.Button{
 
+    private var mSetIoState;
     private var setterId;
     private var commandValue;
 
     function initialize(settings){
         WatchUi.Button.initialize(settings);
 
+        mSetIoState = settings.get(:setIoState);
         setterId = settings.get(:setter);
         commandValue = settings.get(:command);
     }
@@ -200,7 +206,7 @@ class ObjectButton extends WatchUi.Button{
 
     function updateState(value){
         if(value != null){
-            Application.getApp().setIoState(setterId, value, null);
+            mSetIoState.invoke(setterId, value, null);
         }
     }
 }
@@ -209,6 +215,8 @@ class ObjectSwitch extends WatchUi.Selectable {
 
     var stateHighlightedOn;
 
+    private var mGetIoState;
+    private var mSetIoState;
     private var getterId;
     private var setterId;
     private var mappingTrue;
@@ -219,6 +227,8 @@ class ObjectSwitch extends WatchUi.Selectable {
 
         stateHighlightedOn = settings.get(:stateHighlightedOn);
 
+        mGetIoState = settings.get(:getIoState);
+        mSetIoState = settings.get(:setIoState);
         getterId = settings.get(:getter);
         setterId = settings.get(:setter);
         mappingTrue = settings.get(:mapTrue);
@@ -235,10 +245,10 @@ class ObjectSwitch extends WatchUi.Selectable {
 
     function updateState(value){
         if(value != null){
-            Application.getApp().setIoState(setterId, mapTo(value), method(:onIoState));
+            mSetIoState.invoke(setterId, mapTo(value), method(:onIoState));
         }
         else{
-            Application.getApp().getIoState(getterId, method(:onIoState));
+            mGetIoState.invoke(getterId, method(:onIoState));
         }
     }
 

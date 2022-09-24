@@ -9,3 +9,5 @@ fenix7x.resourcePath = $(fenix7x.resourcePath);resources-glance
 venu2.resourcePath = $(venu2.resourcePath);resources-glance
 venu2plus.resourcePath = $(venu2plus.resourcePath);resources-glance
 venu2s.resourcePath = $(venu2s.resourcePath);resources-glance
+
+fenix6xpro.resourcePath = $(fenix6xpro.resourcePath);resources-glance

@@ -16,4 +16,5 @@
     <string id="errorGeneral">Fehler</string>
     <string id="greeting">Begrüßung</string>
     <string id="greetingInfo">Begrüßung in der Übersichtsliste</string>
+    <string id="options">Optionen</string>
 </strings>

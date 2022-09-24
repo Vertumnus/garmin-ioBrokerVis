@@ -14,15 +14,16 @@
             "Monkey C: Edit Products" - Lets you add or remove any product
         -->
         <iq:products>
-            <iq:product id="legacyherocaptainmarvel"/>
             <iq:product id="d2air"/>
             <iq:product id="d2airx10"/>
-            <iq:product id="legacysagadarthvader"/>
             <iq:product id="epix2"/>
+            <iq:product id="fenix6xpro"/>
             <iq:product id="fenix7"/>
             <iq:product id="fenix7s"/>
             <iq:product id="fenix7x"/>
+            <iq:product id="legacyherocaptainmarvel"/>
             <iq:product id="legacyherofirstavenger"/>
+            <iq:product id="legacysagadarthvader"/>
             <iq:product id="legacysagarey"/>
             <iq:product id="venu"/>
             <iq:product id="venu2"/>
