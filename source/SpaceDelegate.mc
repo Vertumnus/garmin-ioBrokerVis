@@ -47,6 +47,7 @@ class SpaceDelegate extends WatchUi.BehaviorDelegate {
         }
 
         WatchUi.pushView(oMenu, new SpaceMenuDelegate(), WatchUi.SLIDE_BLINK);
+        return true;
     }
 
     function onNextPage(){
