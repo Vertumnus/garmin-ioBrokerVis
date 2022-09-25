@@ -5,6 +5,9 @@
 * [Overview](#overview)
 * [Structure](#structure)
 * [App flow and navigation](#app-flow-and-navigation)
+    - [Touch screen devices](#touch-screen-devices)
+    - [Devices without touch screen](#devices-without-touch-screen)
+    - [Interaction via Menu](#interaction-via-menu)
 * [Preconditions](#preconditions)
     - [Details](#details)
         - [Object with configuration](#object-with-configuration)
@@ -30,7 +33,19 @@ The UI is separated in so called _Spaces_. A _Space_ can be a room or a device o
 
 ## App flow and navigation
 
-First of all the widget try to connect to your ioBroker instance. On an error the widget shows the ioBroker icon framed with a red circle and the error description and/or code. On success the widget shows the first configured _Space_. If you have configured switches or buttons you can interact with the related _Objects_ by tapping on them. By Tapping on the _Space_ icon you can refresh the view to get updated states. Wiping up and down you can navigate through the _Spaces_ (it's the standard navigation on garmin devices to navigate to the next or previous page).
+First of all the widget try to connect to your ioBroker instance. On an error the widget shows the ioBroker icon framed with a red circle and the error description and/or code. On success the widget shows the first configured _Space_.
+
+### Touch screen devices
+
+If you have configured switches or buttons you can interact with the related _Objects_ by tapping on them. By Tapping on the _Space_ icon you can refresh the view to get updated states. Wiping up and down you can navigate through the _Spaces_ (it's the standard navigation on garmin devices to navigate to the next or previous page).
+
+### Devices without touch screen
+
+To navigate though the _Spaces_ use the buttons _Up_ and _Down_. You can refresh the view by pressing the button _Enter_. To interact with the _Objects_ you must use the menu (see next passage).
+
+### Interaction via menu
+
+You can interact with the _Objects_ by using the menu. **For devices without touch screen this is the only way to change the state of an _Object_**. To open the menu simply press the button _Menu_. The upcoming menu shows you a list of the _Objects_ from the current selected _Space_. To change the state of an _Object_ navigate (button _Up_ or _Down_) to the menu item and select (button _Enter_) it. With the button _Back_ you can navigate back to the _Space_.
 
 ## Preconditions
 
@@ -72,13 +87,14 @@ As already described, the UI is separated into _Spaces_, so you must define firs
             {
                 "icon": "star",
                 "color": "#FFAA00",
+                "name": "Favorite",
 
             }
         ]
     }
 ```
 
-Each _Space_ has two attributes for visualization. The `icon` and a `color`. See the available icons in the [list](#icon-list) below. You can specify the color in hexadecimal format with a leading #. The `icon` is mandatory. If you do not specify the `color` the widget takes __yellow__ as default.
+Each _Space_ has three attributes for visualization. The `icon`, a `color` and a `name`. See the available icons in the [list](#icon-list) below. You can specify the color in hexadecimal format with a leading #. The `icon` is mandatory. If you do not specify the `color` the widget takes __yellow__ as default. The widget uses the `name` as title for the menu.
 
 As you know a _Space_ exists of _Objects_, so you have to specify them too inside:
 
@@ -87,9 +103,11 @@ As you know a _Space_ exists of _Objects_, so you have to specify them too insid
         "spaces": [
             {
                 "icon": "star",
+                "name": "Favorite",
                 "objects": [
                     {
                         "type": "<icon>|text|state",
+                        "name": "My State",
 
                     }
                 ]
@@ -98,7 +116,7 @@ As you know a _Space_ exists of _Objects_, so you have to specify them too insid
     }
 ```
 
-An _Object_ has always a `type`. The type could be an icon (see [list](#icon-list) below), a simple text or a state. For any type you can specify a `color` like at the _Space_. The type _text_ has __white__ as default color and the others has __blue__.
+An _Object_ has always a `type`. The type could be an icon (see [list](#icon-list) below), a simple text or a state. For any type you can specify a `color` like at the _Space_. The type _text_ has __white__ as default color and the others has __blue__. Additionally you can specify a `name` for your _Object_, which the widget uses as label for the menu item.
 
 The type _text_ needs the additional attribute `get`, where you must specify the state in your ioBroker object list, which has to be read. Additionally you can specify a `unit` as postfix and a `precision` of the decimal places for numbers (rounded).
 
@@ -106,6 +124,7 @@ The type _text_ needs the additional attribute `get`, where you must specify the
 > ```json
 >   {
 >       "type": "text",
+>       "name": "Temperature",
 >       "get": "adapter.0.channel.device.temperature",
 >       "unit": "°C",
 >       "precision": "1"
@@ -122,6 +141,7 @@ The command needs additionally the attribute `value`. This attribute contains th
 >       {
 >           "type": "bulb",
 >           "color": "#FF9900",
+>           "name": "Lights",
 >           "get": "adapter.0.channel.device.state",
 >           "set": "adapter.0.channel.device.state",
 >           "true": "on",
@@ -129,6 +149,7 @@ The command needs additionally the attribute `value`. This attribute contains th
 >       },
 >       {
 >           "type": "play",
+>           "name": "Start Timer",
 >           "set": "adapter.0.channel.device.timer",
 >           "value": "start"
 >       }
@@ -143,6 +164,7 @@ The type _state_ is a little bit more complex. You need in any case the attribut
 > ```jsonc
 >   {
 >       "type": "state",
+>       "name": "Temperature",
 >       "get": "adapter.0.channel.device.temperature",
 >       "scopes": [
 >           { // show snow icon if the temperature is -5 or less
@@ -259,6 +281,10 @@ Check the associated `get` attribute, if you have specified a valid ioBroker sta
 ### Why does the switch not change or doesn't work the trigger on tabbing?
 
 Check if the chosen user has the authorization to write to the state.
+
+### Why has the menu no title or the menu item no label?
+
+Please check your configuration, if you have specified the `name` attribute at the _Space_ (for title) or at the _Object_ (for label).
 
 ## Open Tasks
 
