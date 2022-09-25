@@ -1,4 +1,14 @@
 using Toybox.WatchUi;
+using Toybox.System;
+
+function buildMenuOption() {
+    if(System.getDeviceSettings().monkeyVersion[0] >= 4) {
+        return { :alignment => WatchUi.MenuItem.MENU_ITEM_LABEL_ALIGN_LEFT };
+    }
+    else {
+        return null;
+    }
+}
 
 class ObjectMenuItemFactory {
 
@@ -107,7 +117,7 @@ class ObjectToggleMenuItem extends WatchUi.ToggleMenuItem {
 
     function initialize(label, identifier, enabled, options) {
         mOptions = options;
-        ToggleMenuItem.initialize(label, "", identifier, mapFrom(enabled), options);
+        ToggleMenuItem.initialize(label, null, identifier, mapFrom(enabled), buildMenuOption());
     }
 
     function execute() {
@@ -142,7 +152,7 @@ class ObjectCommandMenuItem extends WatchUi.MenuItem {
 
     function initialize(label, identifier, options ) {
         mOptions = options;
-        MenuItem.initialize(label, "", identifier, options);
+        MenuItem.initialize(label, null, identifier, buildMenuOption());
     }
 
     function execute() {
@@ -152,11 +162,8 @@ class ObjectCommandMenuItem extends WatchUi.MenuItem {
 }
 
 class ObjectStateMenuItem extends WatchUi.IconMenuItem {
-    protected var mOptions;
-
     function initialize(label, identifier, options) {
-        mOptions = options;
-        IconMenuItem.initialize(label, "", identifier, options[:icon], options);
+        IconMenuItem.initialize(label, null, identifier, options[:icon], buildMenuOption());
     }
 
     function execute() {
@@ -169,7 +176,7 @@ class ObjectTextMenuItem extends WatchUi.MenuItem {
 
     function initialize(label, value, identifier, options) {
         mOptions = options;
-        MenuItem.initialize(label, "", identifier, options);
+        MenuItem.initialize(label, null, identifier, buildMenuOption());
         setSubLabel(buildText(value));
     }
 

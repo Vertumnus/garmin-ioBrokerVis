@@ -178,8 +178,9 @@
                 "objects": [
                     {
                         "type": "torch",
-                        "name": "Door Lights",
-                        "set": "torch"
+                        "name": "Prepare",
+                        "set": "sec",
+                        "value": true
                     },
                     {
                         "type": "bulb",
@@ -205,10 +206,26 @@
                         "set": "bulb"
                     },
                     {
-                        "type": "bulb",
-                        "name": "Light Trees",
-                        "get": "bulb",
-                        "set": "bulb"
+                        "type": "state",
+                        "name": "Security",
+                        "get": "sec",
+                        "scopes": [
+                            {
+                                "value": "?",
+                                "type": "text",
+                                "unit": "??"
+                            },
+                            {
+                                "value": false,
+                                "type": "alert",
+                                "color": "#FF0000"
+                            },
+                            {
+                                "value": true,
+                                "type": "ok",
+                                "color": "#00FF00"
+                            }
+                        ]
                     },
                     {
                         "type": "bulb",

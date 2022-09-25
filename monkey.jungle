@@ -2,6 +2,7 @@ project.manifest = manifest.xml
 
 # resources for devices with glance
 d2airx10.resourcePath = $(d2airx10.resourcePath);resources-glance
+d2mach1.resourcePath = $(d2mach1.resourcePath);resources-glance
 epix2.resourcePath = $(epix2.resourcePath);resources-glance
 fenix7.resourcePath = $(fenix7.resourcePath);resources-glance
 fenix7s.resourcePath = $(fenix7s.resourcePath);resources-glance
@@ -10,4 +11,27 @@ venu2.resourcePath = $(venu2.resourcePath);resources-glance
 venu2plus.resourcePath = $(venu2plus.resourcePath);resources-glance
 venu2s.resourcePath = $(venu2s.resourcePath);resources-glance
 
+descentmk2.resourcePath = $(descentmk2.resourcePath);resources-glance
+descentmk2s.resourcePath = $(descentmk2s.resourcePath);resources-glance
+fenix6pro.resourcePath = $(fenix6pro.resourcePath);resources-glance
+fenix6spro.resourcePath = $(fenix6spro.resourcePath);resources-glance
 fenix6xpro.resourcePath = $(fenix6xpro.resourcePath);resources-glance
+fr245m.resourcePath = $(fr245m.resourcePath);resources-glance
+fr255.resourcePath = $(fr255.resourcePath);resources-glance
+fr255m.resourcePath = $(fr255m.resourcePath);resources-glance
+fr255s.resourcePath = $(fr255s.resourcePath);resources-glance
+fr255sm.resourcePath = $(fr255sm.resourcePath);resources-glance
+fr745.resourcePath = $(fr745.resourcePath);resources-glance
+fr945.resourcePath = $(fr945.resourcePath);resources-glance
+fr945lte.resourcePath = $(fr945lte.resourcePath);resources-glance
+fr955.resourcePath = $(fr955.resourcePath);resources-glance
+marqadventurer.resourcePath = $(marqadventurer.resourcePath);resources-glance
+marqathlete.resourcePath = $(marqathlete.resourcePath);resources-glance
+marqaviator.resourcePath = $(marqaviator.resourcePath);resources-glance
+marqcaptain.resourcePath = $(marqcaptain.resourcePath);resources-glance
+marqcommander.resourcePath = $(marqcommander.resourcePath);resources-glance
+marqdriver.resourcePath = $(marqdriver.resourcePath);resources-glance
+marqexpedition.resourcePath = $(marqexpedition.resourcePath);resources-glance
+marqgolfer.resourcePath = $(marqgolfer.resourcePath);resources-glance
+venusq2.resourcePath = $(venusq2.resourcePath);resources-glance
+venusq2m.resourcePath = $(venusq2m.resourcePath);resources-glance
