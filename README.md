@@ -41,7 +41,7 @@ If you have configured switches or buttons you can interact with the related _Ob
 
 ### Devices without touch screen
 
-To navigate though the _Spaces_ use the buttons _Up_ and _Down_. You can refresh the view by pressing the button _Enter_. To interact with the _Objects_ you must use the menu (see next passage).
+To navigate through the _Spaces_ use the buttons _Up_ and _Down_. You can refresh the view by pressing the button _Enter_. To interact with the _Objects_ you must use the menu (see next passage).
 
 ### Interaction via menu
 
