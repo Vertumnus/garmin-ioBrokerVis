@@ -93,14 +93,14 @@ class ObjectMenuItemFactory {
         mValue = value;
     }
 
-    function mapFrom(object, value) {
+    function mapFrom(object as Toybox.Lang.Dictionary, value) {
         if(object["true"] == null && object["false"] == null){
             return value;
         }
         return object["true"] != null ? value == object["true"] : value != object["false"];
     }
 
-    function getTempContext(context, scope) {
+    function getTempContext(context as Toybox.Lang.Dictionary, scope as Toybox.Lang.Dictionary) {
         return {    :object     => {    "name"      => context[:object]["name"],
                                         "get"       => context[:object]["get"],
                                         "type"      => scope["type"],
@@ -115,7 +115,7 @@ class ObjectMenuItemFactory {
 class ObjectToggleMenuItem extends WatchUi.ToggleMenuItem {
     protected var mOptions;
 
-    function initialize(label, identifier, enabled, options) {
+    function initialize(label, identifier, enabled, options as Toybox.Lang.Dictionary) {
         mOptions = options;
         ToggleMenuItem.initialize(label, null, identifier, mapFrom(enabled), buildMenuOption());
     }
@@ -150,7 +150,7 @@ class ObjectToggleMenuItem extends WatchUi.ToggleMenuItem {
 class ObjectCommandMenuItem extends WatchUi.MenuItem {
     protected var mOptions;
 
-    function initialize(label, identifier, options ) {
+    function initialize(label, identifier, options as Toybox.Lang.Dictionary) {
         mOptions = options;
         MenuItem.initialize(label, null, identifier, buildMenuOption());
     }
@@ -162,7 +162,7 @@ class ObjectCommandMenuItem extends WatchUi.MenuItem {
 }
 
 class ObjectStateMenuItem extends WatchUi.IconMenuItem {
-    function initialize(label, identifier, options) {
+    function initialize(label, identifier, options as Toybox.Lang.Dictionary) {
         IconMenuItem.initialize(label, null, identifier, options[:icon], buildMenuOption());
     }
 
@@ -172,9 +172,9 @@ class ObjectStateMenuItem extends WatchUi.IconMenuItem {
 }
 
 class ObjectTextMenuItem extends WatchUi.MenuItem {
-    protected var mOptions;
+    protected var mOptions as Toybox.Lang.Dictionary;
 
-    function initialize(label, value, identifier, options) {
+    function initialize(label, value, identifier, options as Toybox.Lang.Dictionary) {
         mOptions = options;
         MenuItem.initialize(label, null, identifier, buildMenuOption());
         setSubLabel(buildText(value));

@@ -26,13 +26,15 @@ class SpaceDelegate extends WatchUi.BehaviorDelegate {
     function onKey(oEvent) {
         if(oEvent.getKey() == WatchUi.KEY_ENTER) {
             Application.getApp().refreshViewItems();
+            return true;
         }
+        return false;
     }
 
     function onMenu(){
         var dSpace = Application.getApp().getCurrentSpace();
         if(dSpace == null){
-            return;
+            return false;
         }
         
         var oMenu = new WatchUi.Menu2({:title=>(dSpace["name"]!=null)?dSpace["name"]:Rez.Strings.options});

@@ -6,6 +6,6 @@ class SpaceMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(oItem) {
-        return oItem.execute();
+        (oItem as ObjectToggleMenuItem or ObjectCommandMenuItem or ObjectStateMenuItem or ObjectTextMenuItem).execute();
     }
 }

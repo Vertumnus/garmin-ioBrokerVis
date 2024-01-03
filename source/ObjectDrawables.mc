@@ -1,3 +1,4 @@
+using Toybox.Lang;
 using Toybox.WatchUi;
 
 class BaseText extends WatchUi.Text {
@@ -73,14 +74,14 @@ class ObjectText extends BaseText {
 
 class ObjectState extends ObjectText {
 
-    private var allScopes;
+    private var allScopes as Lang.Array or Lang.Object or Null;
     private var currentState;
     private var scopeText;
 
     private var mappingTrue;
     private var mappingFalse;
 
-    function initialize(settings){
+    function initialize(settings as Lang.Dictionary){
         settings["noupdate"] = true;
         ObjectText.initialize(settings);
 
@@ -166,6 +167,9 @@ class ObjectState extends ObjectText {
     function mapFrom(value){
         if(mappingTrue == null && mappingFalse == null){
             return value;
+        }
+        if(value instanceof Lang.String){
+            return value.equals(mappingTrue);
         }
         return value == mappingTrue;
     }
@@ -266,6 +270,9 @@ class ObjectSwitch extends WatchUi.Selectable {
     function mapFrom(value){
         if(mappingTrue == null && mappingFalse == null){
             return value;
+        }
+        if(value instanceof Lang.String){
+            return value.equals(mappingTrue);
         }
         return value == mappingTrue;
     }

@@ -35,7 +35,7 @@ class SpaceView extends WatchUi.View {
         });
     }
 
-    function createObject(dc, dObject){
+    function createObject(dc, dObject as Toybox.Lang.Dictionary){
         var oIconOff, oIconOn, oIcon, sTrue = null, sFalse = null;
         if(dObject["true"] != null){
             sTrue = dObject["true"];

@@ -8,6 +8,7 @@ class MainDelegate extends WatchUi.BehaviorDelegate {
 
     function onTap(oClickEvent){
         Application.getApp().connect();
+        return true;
     }
 
 }

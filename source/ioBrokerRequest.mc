@@ -14,7 +14,6 @@ class ioBrokerRequest{
     private var mDefinitionCallback;
     private var mGetterCallback;
     private var mFinishCallback;
-    private var mErrorCallback;
     private var mAttribute;
     private var mState;
 
@@ -93,7 +92,7 @@ class ioBrokerRequest{
         }, method(:onDefinitionLoaded));
     }
 
-    function onDefinitionLoaded(code, data){
+    function onDefinitionLoaded(code as Toybox.Lang.Number, data as Toybox.Lang.Dictionary) as Void{
         mErrorCode = code;
         if(code == 200){
             mState = Loaded;
@@ -111,12 +110,12 @@ class ioBrokerRequest{
         mAttribute = "val";
 
         if(mDataCallback != null){
-            var aStates = [];
+            var dStates = {};
             for(var i = 0; i < aIds.size(); ++i){
                 var value = mDataCallback.invoke(aIds[i], null);
-                aStates.add({ "id"=>aIds[i], "val"=>value });
+                dStates.put(i, { "id"=>aIds[i], "val"=>value });
             }
-            onReceive(200, aStates);
+            onReceive(200, dStates);
             return;
         }
 
@@ -147,7 +146,7 @@ class ioBrokerRequest{
         }, method(:onReceive));
     }
 
-    function onReceive(code, data){
+    function onReceive(code as Toybox.Lang.Number, data as Toybox.Lang.Dictionary) as Void{
         if(code == 200){
             if(mGetterCallback == null){
                 mState = Finished;
@@ -155,7 +154,12 @@ class ioBrokerRequest{
             }
             var aResult;
             if(mState == RequestGet){
-                aResult = data;
+                if(data instanceof Toybox.Lang.Array){
+                    aResult = data;
+                }
+                else{
+                    aResult = data.values();
+                }
             }
             else{
                 aResult = [data];

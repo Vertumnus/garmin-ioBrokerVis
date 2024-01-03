@@ -11,17 +11,17 @@ class ioBrokerVisApp extends Application.AppBase {
         Space
     }
 
-    private var mSpaces;
+    private var mSpaces as Toybox.Lang.Array;
     private var mCurrentSpace;
-    private var mIoStates;
-    public var mIoRequest;
-    private var mViewItems;
+    private var mIoStates as Toybox.Lang.Dictionary;
+    public var mIoRequest as ioBrokerRequest or Null;
+    private var mViewItems as Toybox.Lang.Array;
     private var mView;
 
-    private var mDemoStates;
+    private var mDemoStates as Toybox.Lang.Array;
 
     public var GioBFont;
-    public var aPositions;
+    public var aPositions as Toybox.Lang.Array;
 
 
     function initialize() {
@@ -30,6 +30,8 @@ class ioBrokerVisApp extends Application.AppBase {
         mCurrentSpace = 0;
         mIoStates = {};
         mViewItems = [];
+        mDemoStates = [];
+        aPositions = [];
     }
 
     function atMain(){
@@ -56,7 +58,7 @@ class ioBrokerVisApp extends Application.AppBase {
         return Application.Properties.getValue("url").equals("http://www.example.com");
     }
 
-    function loadDemo(){
+    function loadDemo() as Void{
         mDemoStates = WatchUi.loadResource(Rez.JsonData.DemoState);
         mIoRequest.onDefinitionLoaded(200, WatchUi.loadResource(Rez.JsonData.Demo));
     }
@@ -143,7 +145,7 @@ class ioBrokerVisApp extends Application.AppBase {
         new Timer.Timer().start(method(:afterDefinitionLoaded), 100, false);
     }
 
-    function afterDefinitionLoaded(){
+    function afterDefinitionLoaded() as Void{
         closeProgressBar();
         if(isSpaceReady()){
             requestCurrentIoStates();
@@ -151,7 +153,7 @@ class ioBrokerVisApp extends Application.AppBase {
         }
     }
 
-    function updateViewItems(){
+    function updateViewItems() as Void{
         if(mViewItems.size() == 0){
             new Timer.Timer().start(method(:updateViewItems), 200, false);
         }
@@ -188,7 +190,7 @@ class ioBrokerVisApp extends Application.AppBase {
         return mSpaces.size() > 0;
     }
 
-    function getCurrentSpace(){
+    function getCurrentSpace() as Toybox.Lang.Dictionary or Null{
         if(isSpaceReady()){
             return mSpaces[mCurrentSpace];
         }
